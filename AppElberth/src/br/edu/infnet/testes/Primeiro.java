@@ -1,3 +1,5 @@
+package br.edu.infnet.testes;
+
 public class Primeiro {
 	
 	private static String nome;
@@ -58,7 +60,7 @@ public class Primeiro {
 	}
 	
 	public static void main(String[] args){
-				
+
 		if(validar(args.length)){
 
 			tratarParametros(args);

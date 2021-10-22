@@ -7,17 +7,42 @@ public class Segundo {
 	private static String[] nomes;
 	private static int[] idades;
 	private static float[] salarios;
+	private static float[] bonus;
+	private static float[] descontos;
 	
-	private static final int QTDE_MAX = 5;
+	private static int qtde = 0;
+	private static final int QTDE_MAX = 2;
+	private static final float SALARIO_MAX = 100000;
 	
 	private static void impressao(){
 		System.out.println("---- Relatório de Funcionários ----");
-		for (int j = 0; j < QTDE_MAX; j++) {
-			if(nomes[j] != null) {
-				System.out.println("Funcionário "+ j + " - " + nomes[j] + " - " + idades[j] + " - " + salarios[j]);
-			}
+		for (int j = 0; j < qtde; j++) {
+			impressao(j);
 		}
 		System.out.println("-----------------------------------");
+	}
+	
+	private static float calcularSalarioLiquido(int idx){
+		return salarios[idx] + bonus[idx] - descontos[idx];
+	}
+	
+	private static String obterSituacao(float sl){
+		return sl > SALARIO_MAX ? "rico" : "pobre";
+	}
+	
+	private static void impressao(int index){
+		float salarioLiquido = calcularSalarioLiquido(index);
+		
+		String situacao = obterSituacao(salarioLiquido);		
+
+		System.out.println(
+				index + " - " + 
+				nomes[index] + " - " + 
+				idades[index] + " - " + 
+				salarios[index] + " :: " +
+				salarioLiquido + " - " +
+				situacao
+				);
 	}
 	
 	public static void main(String[] args){
@@ -25,12 +50,12 @@ public class Segundo {
 		nomes = new String[QTDE_MAX];
 		idades = new int[QTDE_MAX];
 		salarios = new float[QTDE_MAX];
+		bonus = new float[QTDE_MAX];
+		descontos = new float[QTDE_MAX];
 
-		int qtde = 0;
+		int opcao = 0;		
 		
 		Scanner in = new Scanner(System.in);
-		
-		int opcao = 0;
 		
 		do {
 			System.out.println("[1] Cadastrar");
@@ -52,8 +77,14 @@ public class Segundo {
 					System.out.print("Informe o seu salario: ");
 					salarios[qtde] = in.nextFloat();
 					
-					System.out.println("Funcionário "+ qtde + " - " + nomes[qtde] + " - " + idades[qtde] + " - " + salarios[qtde]);
+					System.out.print("Informe o seu bônus: ");
+					bonus[qtde] = in.nextFloat();
 
+					System.out.print("Informe o seu desconto: ");
+					descontos[qtde] = in.nextFloat();
+
+					impressao(qtde);
+					
 					qtde++;
 				} else {
 					System.out.println("Impossível realizar o cadastramento!!!");
@@ -63,8 +94,12 @@ public class Segundo {
 			case 2:
 				System.out.println("Informe o código do funcionário: ");
 				int codigo = in.nextInt();
-				
-				System.out.println("Funcionário "+ codigo + " - " + nomes[codigo] + " - " + idades[codigo] + " - " + salarios[codigo]);
+
+				if(codigo >= 0 && codigo < qtde) {
+					impressao(codigo);
+				} else {
+					System.out.println("O código " + codigo + " é inválido!!");
+				}				
 				break;
 
 			case 3:

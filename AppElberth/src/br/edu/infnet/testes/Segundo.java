@@ -11,6 +11,7 @@ public class Segundo {
 	private static float[] descontos;
 	
 	private static int qtde = 0;
+
 	private static final int QTDE_MAX = 2;
 	private static final float SALARIO_MAX = 100000;
 	
@@ -46,17 +47,17 @@ public class Segundo {
 	}
 	
 	public static void main(String[] args){
-		
+
 		nomes = new String[QTDE_MAX];
 		idades = new int[QTDE_MAX];
 		salarios = new float[QTDE_MAX];
 		bonus = new float[QTDE_MAX];
 		descontos = new float[QTDE_MAX];
 
-		int opcao = 0;		
+		int opcao = 0;
 		
 		Scanner in = new Scanner(System.in);
-		
+
 		do {
 			System.out.println("[1] Cadastrar");
 			System.out.println("[2] Consultar um");

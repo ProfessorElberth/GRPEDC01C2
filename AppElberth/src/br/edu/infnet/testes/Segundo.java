@@ -2,6 +2,8 @@ package br.edu.infnet.testes;
 
 import java.util.Scanner;
 
+import br.edu.infnet.auxiliar.Constante;
+
 public class Segundo {
 	
 	private static String[] nomes;
@@ -12,8 +14,8 @@ public class Segundo {
 	
 	private static int qtde = 0;
 
-	private static final int QTDE_MAX = 2;
-	private static final float SALARIO_MAX = 100000;
+//	private static final int QTDE_MAX = 2;
+//	private static final float SALARIO_MAX = 90000;
 	
 	private static void impressao(){
 		System.out.println("---- Relatório de Funcionários ----");
@@ -28,7 +30,8 @@ public class Segundo {
 	}
 	
 	private static String obterSituacao(float sl){
-		return sl > SALARIO_MAX ? "rico" : "pobre";
+		
+		return sl > Constante.SALARIO_MAX_RICO ? "rico" : "pobre";
 	}
 	
 	private static void impressao(int index){
@@ -47,12 +50,12 @@ public class Segundo {
 	}
 	
 	public static void main(String[] args){
-
-		nomes = new String[QTDE_MAX];
-		idades = new int[QTDE_MAX];
-		salarios = new float[QTDE_MAX];
-		bonus = new float[QTDE_MAX];
-		descontos = new float[QTDE_MAX];
+		
+		nomes = new String[Constante.QTDE_MAX];
+		idades = new int[Constante.QTDE_MAX];
+		salarios = new float[Constante.QTDE_MAX];
+		bonus = new float[Constante.QTDE_MAX];
+		descontos = new float[Constante.QTDE_MAX];
 
 		int opcao = 0;
 		
@@ -68,7 +71,7 @@ public class Segundo {
 
 			switch (opcao) {
 			case 1:
-				if(qtde < QTDE_MAX) {
+				if(qtde < Constante.QTDE_MAX) {
 					System.out.print("Informe o seu nome: ");
 					nomes[qtde] = in.next();
 					

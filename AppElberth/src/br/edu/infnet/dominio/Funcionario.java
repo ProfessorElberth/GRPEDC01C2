@@ -1,26 +1,26 @@
-package br.edu.infnet.testes;
+package br.edu.infnet.dominio;
+
+import br.edu.infnet.auxiliar.Constante;
 
 public class Funcionario {
 
-	String nome;
-	int idade;
-	float salario;
-	float bonus;
-	float desconto;
+	public String nome;
+	public int idade;
+	public float salario;
+	public float bonus;
+	public float desconto;
 
-	private final float SALARIO_MAX = 100000;
-
-	Funcionario(){
+	public Funcionario(){
 		this.nome = "Fantasma";
 	}
 	
-	Funcionario(String nome, int idade){
+	public Funcionario(String nome, int idade){
 		this();
 		this.nome = nome;
 		this.idade = idade;
 	}
 
-	Funcionario(String nome, int idade, float salario, float bonus, float desconto) {
+	public Funcionario(String nome, int idade, float salario, float bonus, float desconto) {
 		this(nome, idade);
 		this.salario = salario;
 		this.bonus = bonus;
@@ -32,10 +32,11 @@ public class Funcionario {
 	}
 	
 	private String obterSituacao(float sl){
-		return sl > SALARIO_MAX ? "rico" : "pobre";
+		
+		return sl > Constante.SALARIO_MAX_RICO ? "rico" : "pobre";
 	}
 	
-	void impressao() {
+	public void impressao() {
 		float salarioLiquido = calcularSalarioLiquido();
 		
 		String situacao = obterSituacao(salarioLiquido);

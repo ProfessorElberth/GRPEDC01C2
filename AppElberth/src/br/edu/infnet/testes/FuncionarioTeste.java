@@ -1,5 +1,7 @@
 package br.edu.infnet.testes;
 
+import br.edu.infnet.dominio.Funcionario;
+
 public class FuncionarioTeste {
 
 	public static void main(String[] args) {

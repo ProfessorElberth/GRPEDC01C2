@@ -1,28 +1,20 @@
 package br.edu.infnet.dominio;
 
-import br.edu.infnet.auxiliar.Constante;
+public class Programador extends Funcionario {
 
-public class Programador {
-
-	public String nome;
-	public int idade;
-	public float salario;
-	public boolean fullStack;
-	public String linguagem;
+	private boolean fullStack;
+	private String linguagem;
 	
 	public Programador() {
-		this.nome = "Javeiro";
+		this.setNome("Javeiro");
 	}
 	
 	public Programador(String nome, int idade) {
-		this();
-		this.nome = nome;
-		this.idade = idade;
+		super(nome, idade);
 	}
 
 	public Programador(String nome, int idade, float salario, boolean fullStack, String linguagem) {
-		this(nome, idade);
-		this.salario = salario;
+		super(nome, idade, salario);
 		this.fullStack = fullStack;
 		this.linguagem = linguagem;
 	}
@@ -34,36 +26,32 @@ public class Programador {
 	private float calcularSalarioLiquidoLinguagem() {
 		return "java".equalsIgnoreCase(this.linguagem) ? 2000 : 750;
 	}
-	
-	private float calcularSalarioLiquido(){
-		return salario + calcularSalarioLiquidoFullStack() + calcularSalarioLiquidoLinguagem();
-	}
-
-	private String obterSituacao(float sl){
-
-		if(sl < Constante.SALARIO_MAX_POBRE) {
-			return "pobre";
-		} else if (sl >= Constante.SALARIO_MAX_RICO) {
-			return "rico";
-		} else {
-			return "classe média";
-		}		
-	}
 
 	@Override
-	public String toString() {
-		
-		float salarioLiquido = calcularSalarioLiquido();
-		
-		return String.format(
-				"O programador %s %s %s tem %d anos e ganha R$%.2f :: SL = R$%.2f (%s)!", 
-				this.linguagem,
-				this.fullStack,
-				this.nome,
-				this.idade,
-				this.salario,
-				salarioLiquido,
-				obterSituacao(salarioLiquido)
-			); 
+	protected float calcularSalarioLiquido() {
+		return super.calcularSalarioLiquido() + calcularSalarioLiquidoFullStack() + calcularSalarioLiquidoLinguagem();
+	}
+	
+	@Override
+	public void impressao() {
+		System.out.println("Fullstack: " + fullStack);
+		System.out.println("Linguagem: " + linguagem);
+		super.impressao();
+	}
+
+	public boolean isFullStack() {
+		return fullStack;
+	}
+
+	public void setFullStack(boolean fullStack) {
+		this.fullStack = fullStack;
+	}
+
+	public String getLinguagem() {
+		return linguagem;
+	}
+
+	public void setLinguagem(String linguagem) {
+		this.linguagem = linguagem;
 	}
 }

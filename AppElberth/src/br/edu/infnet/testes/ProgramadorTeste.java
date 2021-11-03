@@ -6,20 +6,20 @@ public class ProgramadorTeste {
 
 	public static void main(String[] args) {
 
-		Programador prog1 = new Programador();
-		prog1.fullStack = true;
-		prog1.idade = 10;
-		prog1.linguagem = "Java";
-		prog1.salario = 5000;
-		System.out.println(prog1);
+		Programador p1 = new Programador();
+		p1.setFullStack(true);
+		p1.setIdade(10);
+		p1.setLinguagem("Java");
+		p1.setSalario(5000);
+		p1.impressao();
 		
-		Programador prog2 = new Programador("Manoel", 10);
-		prog2.fullStack = true;
-		prog2.linguagem = "jAvA";
-		prog2.salario = 5000;
-		System.out.println(prog2);
+		Programador p2 = new Programador("Manoel", 10);
+		p2.setFullStack(true);
+		p2.setLinguagem("jAvA");
+		p2.setSalario(5000);
+		p2.impressao();
 		
-		Programador prog3 = new Programador("Manoel", 10, 5000, true, "java");
-		System.out.println(prog3);
+		Programador p3 = new Programador("Manoel", 10, 5000, true, "java");
+		p3.impressao();
 	}
 }

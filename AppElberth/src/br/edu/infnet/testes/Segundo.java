@@ -14,9 +14,6 @@ public class Segundo {
 	
 	private static int qtde = 0;
 
-//	private static final int QTDE_MAX = 2;
-//	private static final float SALARIO_MAX = 90000;
-	
 	private static void impressao(){
 		System.out.println("---- Relatório de Funcionários ----");
 		for (int j = 0; j < qtde; j++) {

@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import br.edu.infnet.auxiliar.Constante;
 import br.edu.infnet.dominio.Administrativo;
+import br.edu.infnet.dominio.Estagiario;
 import br.edu.infnet.dominio.Funcionario;
 import br.edu.infnet.dominio.Programador;
 
@@ -32,8 +33,9 @@ public class Terceiro {
 		do {
 			System.out.println("[1] Cadastrar um Administrativo");
 			System.out.println("[2] Cadastrar um Programador");
-			System.out.println("[3] Consultar um");
-			System.out.println("[4] Consultar todos");
+			System.out.println("[3] Cadastrar um Estagiário");
+			System.out.println("[4] Consultar um");
+			System.out.println("[5] Consultar todos");
 			System.out.println("[9] Sair");
 			System.out.print("Informe a opção desejada: ");
 			opcao = in.nextInt();
@@ -100,6 +102,36 @@ public class Terceiro {
 				break;
 
 			case 3:
+				if(qtde < Constante.QTDE_MAX) {
+					
+					Estagiario estag = new Estagiario();
+
+					System.out.print("Informe o seu nome: ");
+					estag.setNome(in.next());
+					
+					System.out.print("Informe a sua idade: ");
+					estag.setIdade(in.nextInt());
+					
+					System.out.print("Informe o seu salario: ");
+					estag.setSalario(in.nextFloat());
+					
+					System.out.print("Informe a sua faculdade: ");
+					estag.setFaculdade(in.next());
+
+					System.out.print("Informe o seu período: ");
+					estag.setPeriodo(in.nextInt());
+					
+					funcionarios[qtde] = estag;
+
+					funcionarios[qtde].impressao();
+					
+					qtde++;
+				} else {
+					System.out.println("Impossível realizar o cadastramento!!!");
+				}
+				break;
+
+			case 4:
 				System.out.println("Informe o código do funcionário: ");
 				int codigo = in.nextInt();
 
@@ -110,7 +142,7 @@ public class Terceiro {
 				}				
 				break;
 
-			case 4:
+			case 5:
 				impressao();			
 				break;
 

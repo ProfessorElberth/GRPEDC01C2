@@ -26,9 +26,9 @@ public class Administrativo extends Funcionario {
 	
 	@Override
 	public void impressao() {
+		super.impressao();
 		System.out.println("Bônus: " + bonus);
 		System.out.println("Desconto: " + desconto);
-		super.impressao();
 	}
 
 	public float getBonus() {

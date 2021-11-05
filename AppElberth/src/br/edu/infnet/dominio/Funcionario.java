@@ -4,11 +4,15 @@ import br.edu.infnet.auxiliar.Constante;
 
 public class Funcionario {
 
+	private Integer id;
 	private String nome;
 	private int idade;
 	private float salario;
 	
+	private static int posicao;
+	
 	public Funcionario() {		
+		this.setId(posicao++);
 		this.nome = "Funcionário";
 		this.idade = 18;
 		this.salario = 1045;
@@ -43,6 +47,7 @@ public class Funcionario {
 	public void impressao(){
 		float salarioLiquido = calcularSalarioLiquido();
 		
+		System.out.println("#"+this.getId()+"#");
 		System.out.println("Nome: " + nome);
 		System.out.println("Idade: " + idade);
 		System.out.println("Salário: " + salario);
@@ -52,7 +57,7 @@ public class Funcionario {
 	
 	@Override
 	public String toString() {
-		return this.nome + " - " + this.idade + " - " + this.salario;
+		return this.id +"# "+ this.nome + " - " + this.idade + " - " + this.salario;
 	}
 
 	public String getNome() {
@@ -77,5 +82,13 @@ public class Funcionario {
 
 	public void setSalario(float salario) {
 		this.salario = salario;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 }

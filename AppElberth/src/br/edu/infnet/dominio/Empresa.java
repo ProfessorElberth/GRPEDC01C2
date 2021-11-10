@@ -1,5 +1,7 @@
 package br.edu.infnet.dominio;
 
+import br.edu.infnet.exceptions.NomeIncompletoException;
+
 public class Empresa {
 
 	private String nome;
@@ -26,10 +28,10 @@ public class Empresa {
 	}
 
 	public void impressao(){
-		
+
 		float valorFolhaPagamento = calcularValorFolhaPagamento();
 		
-		System.out.println("Empresa "+ nome +" cadastrada com sucesso!!!");
+		System.out.println("Empresa "+ getNome() +" cadastrada com sucesso!!!");
 		System.out.println("Quantidade de funcionários: " + qtdeFuncionarios);
 		System.out.println("Folha de pagamento dos funcionários: " + valorFolhaPagamento);
 		if(funcionarios != null) {
@@ -43,10 +45,30 @@ public class Empresa {
 	}
 	
 	public String getNome() {
-		return nome;
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append(this.ultimoNome.toUpperCase().charAt(0));
+		sb.append("., ");
+		sb.append(this.nome.toUpperCase());
+		sb.append(" ");
+		sb.append(this.sobrenome.toLowerCase());
+
+		return sb.toString();
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	
+	public void setNome(String nome) throws NomeIncompletoException {
+		
+		int posIni = nome.indexOf(" ");
+		int posFim = nome.lastIndexOf(" ");
+		
+		if(posIni <= 0 && posFim <= 0) {
+			throw new NomeIncompletoException("O preenchimento do campo 'nome' está incorreto!!!");
+		}
+		
+		this.nome = nome.substring(0, posIni);
+		this.sobrenome = nome.substring(posIni, posFim).trim();
+		this.ultimoNome = nome.substring(posFim).trim();
 	}
 
 	public Funcionario[] getFuncionarios() {

@@ -5,6 +5,7 @@ import br.edu.infnet.dominio.Empresa;
 import br.edu.infnet.dominio.Estagiario;
 import br.edu.infnet.dominio.Funcionario;
 import br.edu.infnet.dominio.Programador;
+import br.edu.infnet.exceptions.NomeIncompletoException;
 
 public class EmpresaTeste {
 
@@ -45,15 +46,35 @@ public class EmpresaTeste {
 		listaFuncionario[3] = p1;
 		listaFuncionario[4] = p2;
 
-		Empresa emp1 = new Empresa();
-		emp1.setNome("Instituto Infnet Java");
-		emp1.setFuncionarios(listaFuncionario);
-		emp1.impressao();
-		
+		try {
+			Empresa emp1 = new Empresa();
+			emp1.setNome("Instituto INFNET java");
+			emp1.setFuncionarios(listaFuncionario);
+			emp1.impressao();
+		} catch (NomeIncompletoException e) {
+			System.out.println(e.getMessage());
+		}
+
 		System.out.println("------------");
 		
-		Empresa emp2 = new Empresa();
-		emp2.setNome("Elberth Java Moraes");
-		emp2.impressao();
+		try {
+			Empresa emp3 = new Empresa();
+			emp3.setNome("Professor");
+			emp3.impressao();
+		} catch (NomeIncompletoException e) {
+			System.out.println(e.getMessage());
+		}
+
+		System.out.println("------------");
+
+		try {
+			Empresa emp2 = new Empresa();
+			emp2.setNome("Elberth moraes");
+			emp2.impressao();
+		} catch (NomeIncompletoException e) {
+			System.out.println(e.getMessage());
+		}
+
+		System.out.println("------------");
 	}
 }

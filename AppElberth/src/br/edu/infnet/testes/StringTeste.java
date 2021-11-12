@@ -4,7 +4,7 @@ public class StringTeste {
 
 	public static void main(String[] args) {
 
-		String nome = new String("Elberth Lins Costa de Moraes");
+		String nome = new String("Elberth de Lins Costa de Moraes Teste");
 		
 		System.out.println("Nome: " + nome);
 		
@@ -32,7 +32,8 @@ public class StringTeste {
 		
 		System.out.println("Posição da primeira letra 'M': " + posicaoM);
 
-		System.out.println("Exibição do Moraes: " + nome.substring(posicaoM, posicaoM+3));
+		System.out.println("Exibição do Mor: " + nome.substring(posicaoM, posicaoM+6));
+		System.out.println("Exibição do Moraes: " + nome.substring(posicaoM));
 		
 		int posPriEspaco = nome.indexOf(" ");
 		int posUltEspaco = nome.lastIndexOf(" ");

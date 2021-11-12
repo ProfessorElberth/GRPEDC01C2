@@ -20,7 +20,7 @@ public class Administrativo extends Funcionario {
 	}
 	
 	@Override
-	protected float calcularSalarioLiquido() {
+	public float calcularSalarioLiquido() {
 		return super.calcularSalarioLiquido() + bonus - desconto;
 	}
 	

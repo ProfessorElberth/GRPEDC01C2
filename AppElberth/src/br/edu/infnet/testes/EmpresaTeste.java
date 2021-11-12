@@ -5,6 +5,7 @@ import br.edu.infnet.dominio.Empresa;
 import br.edu.infnet.dominio.Estagiario;
 import br.edu.infnet.dominio.Funcionario;
 import br.edu.infnet.dominio.Programador;
+import br.edu.infnet.exceptions.FaturamentoNegativoException;
 import br.edu.infnet.exceptions.NomeIncompletoException;
 
 public class EmpresaTeste {
@@ -49,9 +50,10 @@ public class EmpresaTeste {
 		try {
 			Empresa emp1 = new Empresa();
 			emp1.setNome("Instituto INFNET java");
+			emp1.setFaturamento(-100);
 			emp1.setFuncionarios(listaFuncionario);
 			emp1.impressao();
-		} catch (NomeIncompletoException e) {
+		} catch (NomeIncompletoException | FaturamentoNegativoException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -60,8 +62,9 @@ public class EmpresaTeste {
 		try {
 			Empresa emp3 = new Empresa();
 			emp3.setNome("Professor");
+			emp3.setFaturamento(-300);
 			emp3.impressao();
-		} catch (NomeIncompletoException e) {
+		} catch (NomeIncompletoException | FaturamentoNegativoException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -70,8 +73,9 @@ public class EmpresaTeste {
 		try {
 			Empresa emp2 = new Empresa();
 			emp2.setNome("Elberth moraes");
+			emp2.setFaturamento(200);
 			emp2.impressao();
-		} catch (NomeIncompletoException e) {
+		} catch (NomeIncompletoException | FaturamentoNegativoException e) {
 			System.out.println(e.getMessage());
 		}
 

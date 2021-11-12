@@ -28,7 +28,7 @@ public class Programador extends Funcionario {
 	}
 
 	@Override
-	protected float calcularSalarioLiquido() {
+	public float calcularSalarioLiquido() {
 		return super.calcularSalarioLiquido() + 
 				calcularSalarioLiquidoFullStack() + 
 				calcularSalarioLiquidoLinguagem();

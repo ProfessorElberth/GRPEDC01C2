@@ -23,7 +23,7 @@ public class Estagiario extends Funcionario {
 	}
 
 	@Override
-	protected float calcularSalarioLiquido() {
+	public float calcularSalarioLiquido() {
 		return super.calcularSalarioLiquido() + periodo * Constante.VALOR_PERIODO;
 	}
 	

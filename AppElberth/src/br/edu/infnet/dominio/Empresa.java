@@ -1,5 +1,6 @@
 package br.edu.infnet.dominio;
 
+import br.edu.infnet.exceptions.FaturamentoNegativoException;
 import br.edu.infnet.exceptions.NomeIncompletoException;
 
 public class Empresa {
@@ -7,6 +8,7 @@ public class Empresa {
 	private String nome;
 	private String sobrenome;
 	private String ultimoNome;
+	private float faturamento;
 	private Funcionario[] funcionarios;
 	
 	private int qtdeFuncionarios;
@@ -32,6 +34,7 @@ public class Empresa {
 		float valorFolhaPagamento = calcularValorFolhaPagamento();
 		
 		System.out.println("Empresa "+ getNome() +" cadastrada com sucesso!!!");
+		System.out.println("Faturamento: " + faturamento);
 		System.out.println("Quantidade de funcionários: " + qtdeFuncionarios);
 		System.out.println("Folha de pagamento dos funcionários: " + valorFolhaPagamento);
 		if(funcionarios != null) {
@@ -63,7 +66,7 @@ public class Empresa {
 		int posFim = nome.lastIndexOf(" ");
 		
 		if(posIni <= 0 && posFim <= 0) {
-			throw new NomeIncompletoException("O preenchimento do campo 'nome' está incorreto!!!");
+			throw new NomeIncompletoException("O preenchimento do campo 'nome' está incorreto: "+nome+"!!!");
 		}
 		
 		this.nome = nome.substring(0, posIni);
@@ -78,4 +81,19 @@ public class Empresa {
 	public void setFuncionarios(Funcionario[] funcionarios) {
 		this.funcionarios = funcionarios;
 	}
+
+	public float getFaturamento() {
+		return faturamento;
+	}
+
+	public void setFaturamento(float faturamento) throws FaturamentoNegativoException {
+		
+		if(faturamento < 0) {
+			throw new FaturamentoNegativoException("O faturamento da empresa não pode ser negativo!");
+		}
+		
+		this.faturamento = faturamento;
+	}
+	
+	
 }

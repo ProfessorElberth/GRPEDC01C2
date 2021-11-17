@@ -29,6 +29,22 @@ public class Funcionario {
 		this.salario = salario;
 	}
 	
+	public String obterStringSalarioPorFuncionario(){
+		StringBuilder sb = new StringBuilder();
+				
+		sb.append(this.getNome());
+		sb.append(";");
+		sb.append(this.calcularSalarioLiquido());
+		sb.append("\r\n");
+
+		return sb.toString();
+	}
+	
+	public static String obterRodape() {
+		//TODO gerar o método para escrever no arquivo
+		return null;
+	}
+	
 	protected float calcularSalarioLiquido(){
 		return salario;
 	}	

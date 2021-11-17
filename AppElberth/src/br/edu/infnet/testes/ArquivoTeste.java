@@ -31,8 +31,6 @@ public class ArquivoTeste {
 				int qtde = 0;
 				float somaSalarial = 0;
 				
-				float salarioLiquido = 0;
-				
 				String linha = leitura.readLine();
 				while(linha != null) {
 					
@@ -48,12 +46,9 @@ public class ArquivoTeste {
 						adm.setDesconto(Float.valueOf(campos[5]));
 						adm.impressao();
 						
-						salarioLiquido = adm.calcularSalarioLiquido();
+						escrita.write(adm.obterStringSalarioPorFuncionario());
 						
-						escrita.write(adm.getNome()+";"+salarioLiquido+"\r\n");
-						
-						somaSalarial = somaSalarial + salarioLiquido;
-						
+						somaSalarial = somaSalarial + adm.calcularSalarioLiquido();						
 						qtde++;
 
 						break;
@@ -61,18 +56,15 @@ public class ArquivoTeste {
 					case "E":
 						Estagiario est = new Estagiario();			
 						est.setNome(campos[1]);
-						est.setIdade(Integer.valueOf(campos[2]));
-						est.setSalario(Float.valueOf(campos[3]));
+						est.setIdade(Integer.valueOf(campos[2]));						
+						est.setSalario(Float.valueOf(campos[3]));						
 						est.setFaculdade(campos[4]);
 						est.setPeriodo(Integer.valueOf(campos[5]));
 						est.impressao();
 						
-						salarioLiquido = est.calcularSalarioLiquido();
-						
-						escrita.write(est.getNome()+";"+salarioLiquido+"\r\n");
-						
-						somaSalarial = somaSalarial + salarioLiquido;
-						
+						escrita.write(est.obterStringSalarioPorFuncionario());
+
+						somaSalarial = somaSalarial + est.calcularSalarioLiquido();						
 						qtde++;
 						
 						break;
@@ -86,12 +78,9 @@ public class ArquivoTeste {
 						prog.setLinguagem(campos[5]);
 						prog.impressao();
 						
-						salarioLiquido = prog.calcularSalarioLiquido();
+						escrita.write(prog.obterStringSalarioPorFuncionario());
 						
-						escrita.write(prog.getNome()+";"+salarioLiquido+"\r\n");
-						
-						somaSalarial = somaSalarial + salarioLiquido;
-						
+						somaSalarial = somaSalarial + prog.calcularSalarioLiquido();						
 						qtde++;
 						
 						break;
@@ -105,6 +94,9 @@ public class ArquivoTeste {
 				}
 				
 				escrita.write(qtde+";"+somaSalarial+"\r\n");
+				
+				//TODO Implementar este método
+				//escrita.write(Funcionario.obterRodape());
 				
 				leitura.close();
 				escrita.close();

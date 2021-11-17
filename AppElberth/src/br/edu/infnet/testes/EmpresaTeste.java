@@ -48,7 +48,7 @@ public class EmpresaTeste {
 		listaFuncionario[4] = p2;
 
 		try {
-			Empresa emp1 = new Empresa();
+			Empresa emp1 = new Empresa();			
 			emp1.setNome("Instituto INFNET java");
 			emp1.setFaturamento(-100);
 			emp1.setFuncionarios(listaFuncionario);

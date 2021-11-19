@@ -11,6 +11,7 @@ import br.edu.infnet.exceptions.ArquivoCorrompidoException;
 
 public class ArquivoFuncionarioTeste {
 
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		
 		try {			
@@ -21,8 +22,6 @@ public class ArquivoFuncionarioTeste {
 				FileReader file = new FileReader(dir+arq);
 				BufferedReader leitura = new BufferedReader(file);
 				
-				String linha = leitura.readLine();
-				
 				String[] campos = null;
 				
 				List<String> mensagens = new ArrayList<String>();
@@ -31,6 +30,8 @@ public class ArquivoFuncionarioTeste {
 				float salarioTotal = 0;
 				
 				float somatorioSalario = 0;
+				
+				String linha = leitura.readLine();
 				
 				while(linha != null) {
 					campos = linha.split(";");

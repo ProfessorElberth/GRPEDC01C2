@@ -1,5 +1,8 @@
 package br.edu.infnet.dominio;
 
+import java.util.List;
+
+import br.edu.infnet.exceptions.AusenciaFuncionarioException;
 import br.edu.infnet.exceptions.FaturamentoNegativoException;
 import br.edu.infnet.exceptions.NomeIncompletoException;
 
@@ -9,7 +12,7 @@ public class Empresa {
 	private String sobrenome;
 	private String ultimoNome;
 	private float faturamento;
-	private Funcionario[] funcionarios;
+	private List<Funcionario> funcionarios;
 	
 	private int qtdeFuncionarios;
 	
@@ -17,34 +20,31 @@ public class Empresa {
 		
 		float valor = 0;
 		
-		if(funcionarios != null) {
-			for (int i = 0; i < funcionarios.length; i++) {
-				if(funcionarios[i] != null) {
-					valor = valor + funcionarios[i].calcularSalarioLiquido();
-					qtdeFuncionarios++;
-				}
-			}
+		for(Funcionario func : funcionarios) {
+			valor = valor + func.calcularSalarioLiquido();
+			qtdeFuncionarios++;
 		}
 
 		return valor;
 	}
 
-	public void impressao(){
-
+	public void impressao() throws AusenciaFuncionarioException {
+		
+		if(funcionarios == null) {
+			throw new AusenciaFuncionarioException("É obrigatório a associação de funcionários!!!");
+		}
+		
 		float valorFolhaPagamento = calcularValorFolhaPagamento();
 		
 		System.out.println("Empresa "+ getNome() +" cadastrada com sucesso!!!");
 		System.out.println("Faturamento: " + faturamento);
 		System.out.println("Quantidade de funcionários: " + qtdeFuncionarios);
 		System.out.println("Folha de pagamento dos funcionários: " + valorFolhaPagamento);
-		if(funcionarios != null) {
-			System.out.println("Funcionários: ");
-			for (Funcionario funcionario : funcionarios) {
-				if(funcionario != null) {
-					System.out.println(funcionario);
-				}
-			}			
-		}
+
+		System.out.println("Funcionários: ");
+		for (Funcionario funcionario : funcionarios) {
+			System.out.println(funcionario);
+		}			
 	}
 	
 	public String getNome() {
@@ -74,18 +74,9 @@ public class Empresa {
 		this.ultimoNome = nome.substring(posFim).trim();
 	}
 
-	public Funcionario[] getFuncionarios() {
-		return funcionarios;
-	}
-
-	public void setFuncionarios(Funcionario[] funcionarios) {
-		this.funcionarios = funcionarios;
-	}
-
 	public float getFaturamento() {
 		return faturamento;
 	}
-
 	public void setFaturamento(float faturamento) throws FaturamentoNegativoException {
 		
 		if(faturamento < 0) {
@@ -94,6 +85,10 @@ public class Empresa {
 		
 		this.faturamento = faturamento;
 	}
-	
-	
+	public List<Funcionario> getFuncionarios() {
+		return funcionarios;
+	}
+	public void setFuncionarios(List<Funcionario> funcionarios) {
+		this.funcionarios = funcionarios;
+	}
 }

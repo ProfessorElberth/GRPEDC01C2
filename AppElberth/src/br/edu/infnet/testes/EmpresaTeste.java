@@ -1,10 +1,14 @@
 package br.edu.infnet.testes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.edu.infnet.dominio.Administrativo;
 import br.edu.infnet.dominio.Empresa;
 import br.edu.infnet.dominio.Estagiario;
 import br.edu.infnet.dominio.Funcionario;
 import br.edu.infnet.dominio.Programador;
+import br.edu.infnet.exceptions.AusenciaFuncionarioException;
 import br.edu.infnet.exceptions.FaturamentoNegativoException;
 import br.edu.infnet.exceptions.NomeIncompletoException;
 
@@ -40,20 +44,20 @@ public class EmpresaTeste {
 		p2.setLinguagem("jAvA");
 		p2.setSalario(5000);
 		
-		Funcionario[] listaFuncionario = new Funcionario[10];
-		listaFuncionario[0] = a1;
-		listaFuncionario[1] = a2;
-		listaFuncionario[2] = est1;
-		listaFuncionario[3] = p1;
-		listaFuncionario[4] = p2;
+		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+		funcionarios.add(a1);
+		funcionarios.add(a2);
+		funcionarios.add(est1);
+		funcionarios.add(p1);
+		funcionarios.add(p2);
 
 		try {
 			Empresa emp1 = new Empresa();			
 			emp1.setNome("Instituto INFNET java");
 			emp1.setFaturamento(-100);
-			emp1.setFuncionarios(listaFuncionario);
+			emp1.setFuncionarios(funcionarios);
 			emp1.impressao();
-		} catch (NomeIncompletoException | FaturamentoNegativoException e) {
+		} catch (NomeIncompletoException | FaturamentoNegativoException | AusenciaFuncionarioException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -64,7 +68,7 @@ public class EmpresaTeste {
 			emp3.setNome("Professor");
 			emp3.setFaturamento(-300);
 			emp3.impressao();
-		} catch (NomeIncompletoException | FaturamentoNegativoException e) {
+		} catch (NomeIncompletoException | FaturamentoNegativoException | AusenciaFuncionarioException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -74,8 +78,9 @@ public class EmpresaTeste {
 			Empresa emp2 = new Empresa();
 			emp2.setNome("Elberth moraes");
 			emp2.setFaturamento(200);
+			emp2.setFuncionarios(funcionarios);
 			emp2.impressao();
-		} catch (NomeIncompletoException | FaturamentoNegativoException e) {
+		} catch (NomeIncompletoException | FaturamentoNegativoException | AusenciaFuncionarioException e) {
 			System.out.println(e.getMessage());
 		}
 

@@ -1,11 +1,25 @@
 package dominio;
 
+import exceptions.QtdeTituloNegativaException;
+
 public class Jogador extends Profissional {
 
 	private int anoNascimento;
 	private int qtdeTituloNacional;
 	private int qtdeTituloInternacional;
 	
+	public Jogador(int qtdeTituloNacional, int qtdeTituloInternacional) throws QtdeTituloNegativaException {
+		
+		if(qtdeTituloNacional <= 0 || qtdeTituloInternacional <= 0) {
+			throw new QtdeTituloNegativaException(
+					"Impossível calcular o salário: qtde de títulos ("+qtdeTituloNacional +" | "+qtdeTituloInternacional+") menor ou igual a zero!!!"
+					);
+		}
+		
+		this.qtdeTituloNacional = qtdeTituloNacional;
+		this.qtdeTituloInternacional = qtdeTituloInternacional;
+	}
+
 	@Override
 	public float calcularSalario() {
 		return qtdeTituloNacional * 1000 + qtdeTituloInternacional * 5000;
@@ -13,12 +27,11 @@ public class Jogador extends Profissional {
 
 	@Override
 	public String toString() {
-		return String.format("%s;%d;%d;%d;%.2f",
+		return String.format("%s;%d;%d;%d",
 					super.toString(),
 					anoNascimento, 
 					qtdeTituloNacional, 
-					qtdeTituloInternacional,
-					calcularSalario()
+					qtdeTituloInternacional
 				);
 	}
 
@@ -27,17 +40,5 @@ public class Jogador extends Profissional {
 	}
 	public void setAnoNascimento(int anoNascimento) {
 		this.anoNascimento = anoNascimento;
-	}
-	public int getQtdeTituloNacional() {
-		return qtdeTituloNacional;
-	}
-	public void setQtdeTituloNacional(int qtdeTituloNacional) {
-		this.qtdeTituloNacional = qtdeTituloNacional;
-	}
-	public int getQtdeTituloInternacional() {
-		return qtdeTituloInternacional;
-	}
-	public void setQtdeTituloInternacional(int qtdeTituloInternacional) {
-		this.qtdeTituloInternacional = qtdeTituloInternacional;
 	}
 }

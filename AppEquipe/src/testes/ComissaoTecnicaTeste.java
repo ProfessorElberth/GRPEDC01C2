@@ -1,20 +1,27 @@
 package testes;
 
 import dominio.ComissaoTecnica;
+import exceptions.QtdeTituloNegativaException;
 
 public class ComissaoTecnicaTeste {
 
 	public static void main(String[] args) {
-		ComissaoTecnica ct1 = new ComissaoTecnica();
-		ct1.setNome("Professor Elberth");
-		ct1.setQtdeTitulo(5);
-		ct1.setTreinador(true);		
-		System.out.println(ct1);
+		try {
+			ComissaoTecnica ct1 = new ComissaoTecnica(5);
+			ct1.setNome("Professor Elberth");
+			ct1.setTreinador(true);	
+			ct1.impressao();
+		} catch (QtdeTituloNegativaException e) {
+			System.out.println(e.getMessage());
+		}		
 
-		ComissaoTecnica ct2 = new ComissaoTecnica();
-		ct2.setNome("Professor Elberth");
-		ct2.setQtdeTitulo(5);
-		ct2.setTreinador(false);
-		System.out.println(ct2);
+		try {
+			ComissaoTecnica ct2 = new ComissaoTecnica(4);
+			ct2.setNome("Professor Elberth");
+			ct2.setTreinador(false);
+			ct2.impressao();
+		} catch (QtdeTituloNegativaException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

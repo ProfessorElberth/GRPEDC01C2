@@ -1,11 +1,24 @@
 package dominio;
 
+import exceptions.AnoInicioInvalidoException;
+
 public class Dirigente extends Profissional {
 
 	private int anoInicio;
 	private boolean presidente;
 	private Contato contato;
 	
+	public Dirigente(int anoInicio) throws AnoInicioInvalidoException {
+		
+		if(anoInicio > 2021 || anoInicio <= 0) {
+			throw new AnoInicioInvalidoException(
+					"Impossível calcular o salário: ano de início ("+anoInicio+") inválido"
+				);
+		}
+		
+		this.anoInicio = anoInicio;
+	}
+
 	@Override
 	public float calcularSalario() {
 		return (2021 - anoInicio) * 500 + (presidente ? 7500 : 0);
@@ -13,21 +26,14 @@ public class Dirigente extends Profissional {
 
 	@Override
 	public String toString() {
-		return String.format("%s;%d;%s;%s;%.2f", 
+		return String.format("%s;%d;%s;%s", 
 					super.toString(),
 					anoInicio,
 					presidente,
-					contato,
-					calcularSalario()
+					contato
 				);
 	}
 
-	public int getAnoInicio() {
-		return anoInicio;
-	}
-	public void setAnoInicio(int anoInicio) {
-		this.anoInicio = anoInicio;
-	}
 	public boolean isPresidente() {
 		return presidente;
 	}

@@ -2,12 +2,29 @@ package dominio;
 
 import java.util.List;
 
+import exceptions.ProfissionalInexistenteException;
+
 public class Equipe {
 
 	private String nome;
 	private int anoFundacao;
 	private Contato contato;
 	private List<Profissional> profissionais;
+	
+	private	float gastoTotal;
+	
+	public String obterLinhaGravacaoArquivo() {
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(nome);
+		sb.append(";");
+		sb.append(profissionais.size());
+		sb.append(";");
+		sb.append(gastoTotal);
+		sb.append("\r\n");
+		
+		return sb.toString();
+	}
 	
 	@Override
 	public String toString() {
@@ -19,11 +36,16 @@ public class Equipe {
 				);
 	}
 	
-	public void impressao() {
+	public void impressao() throws ProfissionalInexistenteException {
+		
+		if(profissionais == null) {
+			throw new ProfissionalInexistenteException("Não existem profissionais associados!!!");
+		}
+		
 		System.out.println("Relatório de Equipe");
 		
-		float gastoTotal = 0;
-		float salario = 0;
+		
+		float salario = 0;		
 		
 		for(Profissional prof : profissionais) {
 			

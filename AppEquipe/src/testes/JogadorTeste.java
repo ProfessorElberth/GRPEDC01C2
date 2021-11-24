@@ -1,15 +1,18 @@
 package testes;
 
 import dominio.Jogador;
+import exceptions.QtdeTituloNegativaException;
 
 public class JogadorTeste {
 
-	public static void main(String[] args) {		
-		Jogador jogador = new Jogador();
-		jogador.setAnoNascimento(1978);
-		jogador.setNome("Elberth Moraes");
-		jogador.setQtdeTituloInternacional(2);
-		jogador.setQtdeTituloNacional(8);
-		System.out.println(jogador);
+	public static void main(String[] args) {
+		try {			
+			Jogador jogador = new Jogador(8,2);
+			jogador.setAnoNascimento(1978);
+			jogador.setNome("Elberth Moraes");
+			jogador.impressao();
+		} catch (QtdeTituloNegativaException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

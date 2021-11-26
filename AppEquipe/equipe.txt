@@ -1,8 +1,8 @@
-E;equipejava;2021;equipe@java.com;987987987
-J;elberth;1978;10;8
+e;equipejava;2021;equipe@java.com;987987987
+j;elberth;1978;10;8
 D;jazz;2021;jazz@jazz.com;123456789;false
 J;joao;1988;5;16
 T;pedrinho;true;7
-D;boss;2000;boss@boss.com;123456789;true
+d;boss;2000;boss@boss.com;123456789;true
 J;maria;1998;4;12
-T;joaninha;false;10
+t;joaninha;false;10

@@ -46,7 +46,7 @@ public class ArquivoEquipeTeste {
 				
 				String tipo = campos[0];
 				
-				switch (tipo) {
+				switch (tipo.toUpperCase()) {
 				case "E":				
 					Contato contatoEquipe = new Contato();
 					contatoEquipe.setEmail(campos[3]);
@@ -107,11 +107,11 @@ public class ArquivoEquipeTeste {
 			
 			try {
 				equipe.impressao();
+
+				escrita.write(equipe.obterLinhaGravacaoArquivo());				
 			} catch (ProfissionalInexistenteException e) {
 				System.out.println(e.getMessage());
 			}
-			
-			escrita.write(equipe.obterLinhaGravacaoArquivo());
 			
 			leitura.close();
 			escrita.close();

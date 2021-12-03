@@ -1,12 +1,16 @@
 package br.edu.infnet.apppedido.model.domain;
 
+import br.edu.infnet.apppedido.exceptions.PesoInvalidoException;
+import br.edu.infnet.apppedido.exceptions.QuantidadeServidoNegativaException;
+import br.edu.infnet.apppedido.exceptions.ValorInvalidoException;
+
 public class Comida extends Produto {
 	
 	private String acompanhamento;
 	private boolean vegana;
 	private int qtdeServido;
 
-	public Comida(String descricao, float valor, float peso) {
+	public Comida(String descricao, float valor, float peso) throws ValorInvalidoException, PesoInvalidoException {
 		super(descricao, valor, peso);
 	}
 
@@ -54,7 +58,12 @@ public class Comida extends Produto {
 		this.vegana = vegana;
 	}
 
-	public void setQtdeServido(int qtdeServido) {
+	public void setQtdeServido(int qtdeServido) throws QuantidadeServidoNegativaException {
+
+		if(qtdeServido < 0) {
+			throw new QuantidadeServidoNegativaException("Impossível realizar o cadastramento do produto " + this.getDescricao() + " com a quantidade de servido negativa!");
+		}
+		
 		this.qtdeServido = qtdeServido;
 	}
 }

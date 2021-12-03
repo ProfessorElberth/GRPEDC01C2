@@ -1,12 +1,15 @@
 package br.edu.infnet.apppedido.model.domain;
 
+import br.edu.infnet.apppedido.exceptions.PesoInvalidoException;
+import br.edu.infnet.apppedido.exceptions.ValorInvalidoException;
+
 public class Sobremesa extends Produto {
 
 	private String ingrediente;
 	private boolean calda;
 	private boolean diet;
 	
-	public Sobremesa(String descricao, float valor, float peso) {
+	public Sobremesa(String descricao, float valor, float peso) throws ValorInvalidoException, PesoInvalidoException {
 		super(descricao, valor, peso);
 	}
 

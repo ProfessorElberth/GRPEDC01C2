@@ -30,9 +30,9 @@ public class Sobremesa extends Produto {
 		sb.append(";");
 		sb.append(ingrediente);
 		sb.append(";");
-		sb.append(calda);
+		sb.append(calda ? "com calda" : "sem calda");
 		sb.append(";");
-		sb.append(diet);
+		sb.append(diet ? "diet" : "não-diet");
 		
 		return sb.toString();
 	}

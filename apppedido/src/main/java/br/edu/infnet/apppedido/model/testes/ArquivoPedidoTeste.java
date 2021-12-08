@@ -29,109 +29,122 @@ public class ArquivoPedidoTeste {
 	public static void main(String[] args) {
 		try {
 			
-			String arquivo = "pedido.txt";
+			List<String> inconsistencias = new ArrayList<String>();
 			
-			FileReader fileR = new FileReader(arquivo);
-			BufferedReader leitura = new BufferedReader(fileR);
-			
-			FileWriter fileW = new FileWriter("out_"+arquivo);
-			BufferedWriter escrita = new BufferedWriter(fileW);
-			
-			String linha = leitura.readLine();
-			
-			String[] campos = null;
-			
-			List<Produto> produtos = new ArrayList<Produto>();
-
-			Pedido pedido = null;
-			
-			while(linha != null) {
-				campos = linha.split(";");
+			System.out.println("Início do processamento de pedidos!!!");
+			try {
 				
-				String tipo = campos[0];
+				String arquivo = "pedido.txt";
 				
-				switch (tipo.toUpperCase()) {
-				case "P":				
-					Solicitante solicitante = null;
-					try {
-						solicitante = new Solicitante("Elberth", "elberth@elberth.com", "123.345.456-56");
-					} catch (NomeInvalidoException | EmailInvalidoException | CpfInvalidoException e) {
-						System.out.println(e.getMessage());
-					}		
-
-					try {
-						pedido = new Pedido(solicitante);
-						pedido.setDescricao("Pedido do professor elberth");
-						pedido.setProdutos(produtos);
+				FileReader fileR = new FileReader(arquivo);
+				BufferedReader leitura = new BufferedReader(fileR);
+				
+				FileWriter fileW = new FileWriter("out_"+arquivo);
+				BufferedWriter escrita = new BufferedWriter(fileW);
+				
+				String linha = leitura.readLine();
+				
+				String[] campos = null;
+				
+				List<Produto> produtos = new ArrayList<Produto>();
+	
+				Pedido pedido = null;
+				
+				while(linha != null) {
+					campos = linha.split(";");
+					
+					String tipo = campos[0];
+					
+					switch (tipo.toUpperCase()) {
+					case "P":
+	
+						Solicitante solicitante = null;
+						try {
+							solicitante = new Solicitante(campos[2], campos[3], campos[4]);
+						} catch (NomeInvalidoException | EmailInvalidoException | CpfInvalidoException e) {
+							System.out.println(e.getMessage());
+						}		
+	
+						try {
+							pedido = new Pedido(solicitante);
+							pedido.setDescricao(campos[1]);
+							pedido.setProdutos(produtos);
+							
+						} catch (SolicitanteInexistenteException e) {
+							System.out.println(e.getMessage());
+						}
 						
-						pedido.impressao();
-					} catch (PedidoSemProdutosException | SolicitanteInexistenteException e) {
-						System.out.println(e.getMessage());
+						break;
+					case "B":				
+						try {
+							Bebida vinho = new Bebida(campos[1], Float.valueOf(campos[2]), Float.valueOf(campos[3]));
+							vinho.setGelada(Boolean.valueOf(campos[4]));
+							vinho.setImportada(Boolean.valueOf(campos[5]));
+							vinho.setMarca(campos[6]);
+							
+							produtos.add(vinho);
+						} catch (ValorInvalidoException | PesoInvalidoException e) {
+							System.out.println(e.getMessage());
+						}
+	
+						break;
+					case "C":				
+						try {
+							Comida pizza = new Comida(campos[1], Float.valueOf(campos[2]), Float.valueOf(campos[3]));
+							pizza.setAcompanhamento(campos[4]);
+							pizza.setQtdeServido(Integer.valueOf(campos[5]));
+							pizza.setVegana(Boolean.valueOf(campos[6]));
+							
+							produtos.add(pizza);
+						} catch (QuantidadeServidoNegativaException | ValorInvalidoException | PesoInvalidoException e) {
+							System.out.println(e.getMessage());
+						}
+	
+						break;
+					case "S":				
+						try {
+							Sobremesa chocolate = new Sobremesa(campos[1], Float.valueOf(campos[2]), Float.valueOf(campos[3]));
+							chocolate.setCalda(Boolean.valueOf(campos[4]));
+							chocolate.setDiet(Boolean.valueOf(campos[5]));
+							chocolate.setIngrediente(campos[6]);
+	
+							produtos.add(chocolate);
+						} catch (ValorInvalidoException | PesoInvalidoException e) {
+							System.out.println(e.getMessage());
+						}
+	
+						break;
+	
+					default:
+						inconsistencias.add(linha);
+						break;
 					}
 					
-					break;
-				case "B":				
-					try {
-						Bebida vinho = new Bebida("Vinho", 100, 350);
-						vinho.setGelada(false);
-						vinho.setImportada(true);
-						vinho.setMarca("Genericão");
-						
-						produtos.add(vinho);
-					} catch (ValorInvalidoException | PesoInvalidoException e) {
-						System.out.println(e.getMessage());
-					}
-
-					break;
-				case "C":				
-					try {
-						Comida pizza = new Comida("Pizza", 50, 700);
-						pizza.setAcompanhamento("Docinho do vovó");
-						pizza.setQtdeServido(4);
-						pizza.setVegana(false);
-						
-						produtos.add(pizza);
-					} catch (QuantidadeServidoNegativaException | ValorInvalidoException | PesoInvalidoException e) {
-						System.out.println(e.getMessage());
-					}
-
-					break;
-				case "S":				
-					try {
-						Sobremesa chocolate = new Sobremesa("Chocolate", 10, 50);
-						chocolate.setCalda(true);
-						chocolate.setDiet(false);
-						chocolate.setIngrediente("muito chocolate");
-
-						produtos.add(chocolate);
-					} catch (ValorInvalidoException | PesoInvalidoException e) {
-						System.out.println(e.getMessage());
-					}
-
-					break;
-
-				default:
-					System.out.println("Tipo inválido: " + tipo);
-					break;
+					linha = leitura.readLine();
 				}
 				
-				linha = leitura.readLine();
+				try {
+					pedido.impressao();
+	
+					escrita.write(pedido.obterLinhaGravacaoArquivo());		
+					
+					System.out.println("#Quantidade de erros no processamento: " + inconsistencias.size());
+					for(String erro : inconsistencias) {
+						System.out.println("- " + erro);
+					}
+				} catch (PedidoSemProdutosException e) {
+					System.out.println(e.getMessage());
+				}
+				
+				leitura.close();
+				escrita.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-			
-			try {
-				pedido.impressao();
-
-				escrita.write(pedido.obterLinhaGravacaoArquivo());				
-			} catch (PedidoSemProdutosException e) {
-				System.out.println(e.getMessage());
-			}
-			
-			leitura.close();
-			escrita.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} finally {
+			System.out.println("Processamento finalizado!!!");
 		}
 	}
 }

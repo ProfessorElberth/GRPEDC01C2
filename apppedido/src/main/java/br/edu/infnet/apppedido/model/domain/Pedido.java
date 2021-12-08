@@ -25,6 +25,17 @@ public class Pedido {
 		this.solicitante = solicitante;
 	}
 	
+	public float calcularValorTotalPedido() {
+		
+		float valorTotal = 0;
+		
+		for(Produto prod : produtos) {
+			valorTotal = valorTotal + prod.calcularValorVenda();
+		}
+		
+		return valorTotal;
+	}
+	
 	public String obterLinhaGravacaoArquivo() {
 		
 		StringBuilder sb = new StringBuilder();
@@ -33,9 +44,8 @@ public class Pedido {
 		sb.append(solicitante.getNome());
 		sb.append(";");
 		sb.append(produtos.size());
-		//TODO Criar um método que faça o cálculo do valor total do pedido
-//		sb.append(";");
-//		sb.append(valorTotalPedido);
+		sb.append(";");
+		sb.append(calcularValorTotalPedido());
 		sb.append("\r\n");
 		
 		return sb.toString();

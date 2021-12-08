@@ -1,0 +1,13 @@
+P;Pedido do professor elberth;Elberth;elberth@elberth.com;123.345.456-56
+B;Vinho;100;350;false;true;nosso vinho
+B;Chope;10;500;true;false;brahma
+W;Pizza;50;700;queijo e presunto;4;false
+C;Pizza;50;700;queijo e presunto;4;false
+B;Refrigerante;5;750;true;false;coke
+S;Chocolate;10;50;true;true;muito chocolate
+Z;Churrasco;100;1000;carne, frango e coracao;5;false
+C;Churrasco;100;1000;carne, frango e coracao;5;false
+S;Bolo;20;150;false;false;coco e chocolate
+B;Suco;15;1000;true;false;da fruta
+A;Suco;15;1000;true;false;da fruta
+C;Hot-dog;20;250;algas e pao;1;true

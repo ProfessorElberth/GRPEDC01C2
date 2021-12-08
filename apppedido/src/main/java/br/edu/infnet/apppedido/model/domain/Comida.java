@@ -31,7 +31,7 @@ public class Comida extends Produto {
 		sb.append(";");
 		sb.append(acompanhamento);
 		sb.append(";");
-		sb.append(vegana);
+		sb.append(vegana ? "vegana" : "não-vegana");
 		sb.append(";");
 		sb.append(qtdeServido);
 		

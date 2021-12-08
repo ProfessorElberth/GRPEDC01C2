@@ -30,9 +30,9 @@ public class Bebida extends Produto {
 		sb.append(";");
 		sb.append(marca);
 		sb.append(";");
-		sb.append(importada);
+		sb.append(importada ? "importada" : "nacional");
 		sb.append(";");
-		sb.append(gelada);		
+		sb.append(gelada ? "gelada" : "quente");		
 
 		return sb.toString();
 	}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<title>App.2022 - Java</title>
+</head>
+<body>
+	<div class="container">
+	
+		<form action="aluno" method="post">
+			<h2>Cadastramento de Alunos</h2>
+		
+			<div class="form-group">
+				<label>Nome:</label>
+				<input type="text" class="form-control" name="nome" value="Elberth L C Moraes"> 
+			</div>
+			
+			<div class="form-group">
+				<label>E-mail:</label>
+				<input type="email" class="form-control" name="email" value="elberth.moraes@prof.infnet.edu.br">
+			</div>
+			
+			<div class="form-group">
+				<label>Idade:</label>
+				<input type="text" class="form-control" name="idade" value="43"> 
+			</div>
+
+			<div class="form-group">
+				<label>Mensalidade:</label>
+				<input type="text" class="form-control" name="mensalidade" value="1000"> 
+			</div>
+
+			<div class="form-group">
+				<label>Curso:</label>
+				
+				<div class="radio">
+				  <label><input type="radio" name="curso" value="G"> Graduação</label>
+				</div>				
+				<div class="radio">
+				  <label><input type="radio" name="curso" value="E"> Especialização</label>
+				</div>				
+				<div class="radio">
+				  <label><input type="radio" name="curso" value="M" checked> Mestrado</label>
+				</div>				
+				<div class="radio">
+				  <label><input type="radio" name="curso" value="D"> Doutorado</label>
+				</div>				
+			</div>
+			
+			<div class="form-group">
+				<label>Disciplinas:</label>
+				
+				<div class="checkbox">
+				  <label><input type="checkbox" name="disciplinas" value="fun" checked> Fundamentos Java</label>
+				</div>				
+				<div class="checkbox">
+				  <label><input type="checkbox" name="disciplinas" value="poo" checked> Orientação a Objetos</label>
+				</div>				
+				<div class="checkbox">
+				  <label><input type="checkbox" name="disciplinas" value="web" checked> Java Web</label>
+				</div>				
+			</div>
+			
+			<div class="form-group">
+				<label>Região:</label>
+				<select name="regiao" class="form-control">
+					<option value="S">Sul</option>
+					<option value="Su" selected>Sudeste</option>
+					<option value="C">Centro-Oeste</option>
+					<option value="N">Norte</option>
+					<option value="No">Nordeste</option>
+				</select>
+			</div>
+
+			<button type="submit">Cadastrar</button>
+		</form>	
+	
+	</div>
+	
+</body>
+</html>

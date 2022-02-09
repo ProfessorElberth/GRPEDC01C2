@@ -4,8 +4,7 @@
   <welcome-file-list>
     <welcome-file>login</welcome-file>
     <welcome-file>aluno</welcome-file>
-    <welcome-file>aluno.html</welcome-file>
-    <welcome-file>confirmacao.html</welcome-file>
+    <welcome-file>aluno/cadastro.html</welcome-file>
   </welcome-file-list>
   <servlet>
     <description></description>

@@ -1,8 +1,6 @@
 package br.edu.infnet.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +18,7 @@ public class AlunoController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		request.getRequestDispatcher("aluno.html").forward(request, response);
+		request.getRequestDispatcher("aluno/cadastro.html").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,45 +32,8 @@ public class AlunoController extends HttpServlet {
 		
 		AlunoRepository.incluir(aluno);
 		
-		List<Aluno> alunos = AlunoRepository.obterLista();
+		request.setAttribute("alunoLista", AlunoRepository.obterLista());
 		
-		PrintWriter out = response.getWriter();
-		
-		out.println(
-				"<!DOCTYPE html>" + 
-				"<html>" + 
-				"<head>" + 
-				"	<meta charset=\"ISO-8859-1\">" + 
-				"	<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css\">" + 
-				"	<title>App.2022 - Java</title>" + 
-				"</head>" + 
-				"<body>" + 
-				"	<div class=\"container\">" + 
-				"		<form action=\"aluno\" method=\"get\">" + 
-				"			<h2>Cadastramento realizado com sucesso!!!</h2>"
-				);
-		
-		out.println("<h4>" + aluno.toString()+"</h4>");
-		
-		out.println(
-				"			<button type=\"submit\">Voltar</button>" + 
-				"		</form>"); 
-
-		out.println("<h3>Quantidade de alunos cadastrados: " + alunos.size()+"</h3>");
-		
-		for(Aluno a: alunos) {
-			out.println("<h4>"+a.getNome()+" | "+a.getEmail()+"</h4>");			
-		}
-		
-		out.println(
-				"	</div>" + 
-				"</body>" + 
-				"</html>"
-				);		
-
-		
-//		aluno.impressao();
-		
-//		request.getRequestDispatcher("confirmacao.html").forward(request, response);
+		request.getRequestDispatcher("aluno/lista.jsp").forward(request, response);
 	}
 }

@@ -29,6 +29,8 @@ public class AcessoController extends HttpServlet {
 		Usuario usuario = AcessoRepository.validar(email, senha);
 		
 		if(usuario != null) {
+			request.setAttribute("user", usuario);
+			
 			request.setAttribute("alunoLista", AlunoRepository.obterLista());
 
 			request.getRequestDispatcher("aluno/lista.jsp").forward(request, response);

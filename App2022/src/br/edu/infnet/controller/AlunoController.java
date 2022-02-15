@@ -32,6 +32,9 @@ public class AlunoController extends HttpServlet {
 		
 		AlunoRepository.incluir(aluno);
 		
+//		request.setAttribute("user", usuario);
+		//TODO obter usuário da session
+		
 		request.setAttribute("alunoLista", AlunoRepository.obterLista());
 		
 		request.getRequestDispatcher("aluno/lista.jsp").forward(request, response);

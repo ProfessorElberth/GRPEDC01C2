@@ -1,3 +1,4 @@
+<%@page import="br.edu.infnet.model.domain.Usuario"%>
 <%@page import="java.util.List"%>
 <%@page import="br.edu.infnet.model.domain.Aluno"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
@@ -10,12 +11,15 @@
 </head>
 <body>
 	<%
+	Usuario userLogado = (Usuario)request.getAttribute("user"); 
 	List<Aluno> alunos = (List<Aluno>)request.getAttribute("alunoLista");
 	int qtde = alunos.size();
+	
+	String nome = userLogado != null ? userLogado.getNome() : "Fantasma";
 	%>
 	 
 	<div class="container">	
-		<h4>Cadastramento de alunos:</h4>
+		<h4><%=nome%>, realize o cadastramento de alunos:</h4>
 
 		<form action="aluno" method="get">
 			<button type="submit">Novo aluno</button>

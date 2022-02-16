@@ -1,6 +1,7 @@
 package br.edu.infnet.apppedido.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -14,10 +15,17 @@ public class AlunoController {
 		return "aluno/cadastro";
 	}
 	
+	@GetMapping(value = "/alunos")
+	public String telaLista() {
+
+		return "aluno/lista";
+	}
+
 	@PostMapping(value = "/aluno/incluir")
-	public String incluir(Aluno aluno){
-		System.out.println("O aluno " + aluno.getNome() + " foi incluído com sucesso!!!");
+	public String incluir(Aluno aluno, Model model){
 		
-		return "aluno/cadastro";
+		model.addAttribute("mensagem", "O aluno " + aluno.getNome() + " foi incluído com sucesso!!!");
+
+		return telaLista();
 	}
 }

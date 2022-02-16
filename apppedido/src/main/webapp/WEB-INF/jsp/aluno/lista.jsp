@@ -1,6 +1,7 @@
+<%@page import="br.edu.infnet.apppedido.model.domain.Aluno"%>
 <%@page import="java.util.List"%>
-<%@page import="br.edu.infnet.model.domain.Aluno"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,13 +12,19 @@
 <body>
 	<%
 	List<Aluno> alunos = (List<Aluno>)request.getAttribute("alunoLista");
-	int qtde = alunos.size();
+	int qtde = alunos != null ? alunos.size() : 0;
 	%>
 	 
 	<div class="container">	
 		<h4>Cadastramento de alunos:</h4>
 
-		<form action="aluno" method="get">
+		<c:if test="${not empty mensagem}">
+			<div class="alert alert-success">
+			  <strong>Confirmação!</strong> ${mensagem}
+			</div>
+		</c:if>
+
+		<form action="/aluno" method="get">
 			<button type="submit">Novo aluno</button>
 		</form>
 

@@ -22,7 +22,6 @@ public class AlunoController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		Aluno aluno = new Aluno(request.getParameter("nome"), request.getParameter("email"));
 		aluno.setIdade(Integer.valueOf(request.getParameter("idade")));
 		aluno.setMensalidade(Float.valueOf(request.getParameter("mensalidade")));
@@ -34,7 +33,7 @@ public class AlunoController extends HttpServlet {
 		
 //		request.setAttribute("user", usuario);
 		//TODO obter usuário da session
-		
+
 		request.setAttribute("alunoLista", AlunoRepository.obterLista());
 		
 		request.getRequestDispatcher("aluno/lista.jsp").forward(request, response);

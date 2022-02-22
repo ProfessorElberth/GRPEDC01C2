@@ -10,11 +10,7 @@
 	<title>App.2022 - Java</title>
 </head>
 <body>
-	<%
-	List<Aluno> alunos = (List<Aluno>)request.getAttribute("alunoLista");
-	int qtde = alunos != null ? alunos.size() : 0;
-	%>
-	 
+
 	<div class="container">	
 		<h4>Cadastramento de alunos:</h4>
 
@@ -28,11 +24,12 @@
 			<button type="submit">Novo aluno</button>
 		</form>
 
-	  	<%if(qtde > 0){%>
-		  	<p>Quantidade de alunos cadastrados: <%=qtde%></p>            
+		<c:if test="${not empty alunoLista}">
+		  	<p>Quantidade de alunos cadastrados: ${alunoLista.size()}</p>            
 		  	<table class="table table-striped">
 			    <thead>
 			      <tr>
+			        <th></th>
 			        <th>Nome</th>
 			        <th>E-mail</th>
 			        <th>Idade</th>
@@ -41,18 +38,20 @@
 			      </tr>
 			    </thead>
 			    <tbody>
-				<%for(Aluno a: alunos) {%>
+			    <c:forEach var="a" items="${alunoLista}">
 			      <tr>
-			        <td><%=a.getNome()%></td>
-			        <td><%=a.getEmail()%></td>
-			        <td><%=a.getIdade()%></td>
-			        <td><%=a.getCurso()%></td>
-			        <td><%=a.getRegiao()%></td>
+			      	<td>${a.id}</td>
+			        <td>${a.nome}</td>
+			        <td>${a.email}</td>
+			        <td>${a.idade}</td>
+			        <td>${a.curso}</td>
+			        <td>${a.regiao}</td>
 			      </tr>
-				<%}%>
+				</c:forEach>
 			    </tbody>
 			    <tfoot>
 			      <tr>
+			        <th></th>
 			        <th>Nome</th>
 			        <th>E-mail</th>
 			        <th>Idade</th>
@@ -61,9 +60,11 @@
 			      </tr>
 			    </tfoot>
 		  	</table>
-	  	<%} else {%>
+		</c:if>
+		
+		<c:if test="${empty alunoLista}">
 	  		<p>Não existem alunos cadastrados!!!</p>            
-	  	<%}%>
+	  	</c:if>
 	</div>
 </body>
 </html>

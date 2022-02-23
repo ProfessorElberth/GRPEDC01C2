@@ -29,34 +29,34 @@
 		  	<table class="table table-striped">
 			    <thead>
 			      <tr>
-			        <th></th>
 			        <th>Nome</th>
 			        <th>E-mail</th>
 			        <th>Idade</th>
 			        <th>Curso</th>
 			        <th>Região</th>
+			        <th></th>
 			      </tr>
 			    </thead>
 			    <tbody>
 			    <c:forEach var="a" items="${alunoLista}">
 			      <tr>
-			      	<td>${a.id}</td>
 			        <td>${a.nome}</td>
 			        <td>${a.email}</td>
 			        <td>${a.idade}</td>
 			        <td>${a.curso}</td>
 			        <td>${a.regiao}</td>
+			        <td><a href="/aluno/${a.id}/excluir">Excluir</a></td>
 			      </tr>
 				</c:forEach>
 			    </tbody>
 			    <tfoot>
 			      <tr>
-			        <th></th>
 			        <th>Nome</th>
 			        <th>E-mail</th>
 			        <th>Idade</th>
 			        <th>Curso</th>
 			        <th>Região</th>
+			        <th></th>
 			      </tr>
 			    </tfoot>
 		  	</table>

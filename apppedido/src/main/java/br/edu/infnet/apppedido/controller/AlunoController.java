@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import br.edu.infnet.apppedido.model.domain.Aluno;
@@ -32,8 +33,23 @@ public class AlunoController {
 	public String incluir(Aluno aluno, Model model){
 
 		alunoService.incluir(aluno);
-		
+
 		model.addAttribute("mensagem", "O aluno " + aluno.getNome() + " foi incluído com sucesso!!!");
+		
+		return telaLista(model);
+	}
+
+	@GetMapping(value = "/aluno/{id}/excluir")
+	public String excluir(Model model, @PathVariable Integer id) {
+		
+		Aluno aluno = alunoService.obterPorId(id);
+				
+		if(aluno != null) {			
+			alunoService.excluir(id);			
+			model.addAttribute("mensagem", "O aluno "+aluno.getNome()+" foi excluído com sucesso!!!");
+		} else {
+			model.addAttribute("mensagem", "Aluno inexistente.. impossível realizar a exclusão!!!");			
+		}
 		
 		return telaLista(model);
 	}

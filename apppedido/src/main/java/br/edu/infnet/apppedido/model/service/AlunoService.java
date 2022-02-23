@@ -1,27 +1,32 @@
 package br.edu.infnet.apppedido.model.service;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.apppedido.model.domain.Aluno;
+import br.edu.infnet.apppedido.model.repository.AlunoRepository;
 
 @Service
 public class AlunoService {
 	
-	private static Map<Integer, Aluno> mapaAlunos = new HashMap<Integer, Aluno>();
-	
-	private static Integer id = 0;
+	@Autowired
+	private AlunoRepository alunoRepository;
 
-	public Collection<Aluno> obterLista(){
-		
-		return mapaAlunos.values();
+	public Collection<Aluno> obterLista(){		
+		return (Collection<Aluno>) alunoRepository.findAll();
 	}
 	
-	public void incluir(Aluno aluno){
-		aluno.setId(++id);
-		mapaAlunos.put(aluno.getId(), aluno);
+	public Aluno incluir(Aluno aluno){
+		return alunoRepository.save(aluno);
+	}
+	
+	public void excluir(Integer id) {
+		alunoRepository.deleteById(id);
+	}
+	
+	public Aluno obterPorId(Integer id) {
+		return alunoRepository.findById(id).orElse(null);
 	}
 }

@@ -20,8 +20,13 @@ public class Aluno {
 	private String[] disciplinas;
 	private String curso;
 	private String regiao;
+	
+	public Aluno() {
+		//
+	}
 
 	public Aluno(String nome, String email) {
+		this();
 		this.nome = nome;
 		this.email = email;
 	}	

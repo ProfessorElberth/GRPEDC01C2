@@ -6,8 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import br.edu.infnet.apppedido.model.domain.Aluno;
+import br.edu.infnet.apppedido.model.domain.Usuario;
 import br.edu.infnet.apppedido.model.service.AlunoService;
 
 @Controller
@@ -22,25 +24,27 @@ public class AlunoController {
 	}
 	
 	@GetMapping(value = "/alunos")
-	public String telaLista(Model model) {
+	public String telaLista(Model model, @SessionAttribute("user") Usuario usuario) {
 
-		model.addAttribute("alunoLista", alunoService.obterLista());
+		model.addAttribute("alunoLista", alunoService.obterLista(usuario));
 
 		return "aluno/lista";
 	}
 
 	@PostMapping(value = "/aluno/incluir")
-	public String incluir(Aluno aluno, Model model){
+	public String incluir(Aluno aluno, Model model, @SessionAttribute("user") Usuario usuario){
+		
+		aluno.setUsuario(usuario);
 
 		alunoService.incluir(aluno);
 
 		model.addAttribute("mensagem", "O aluno " + aluno.getNome() + " foi incluído com sucesso!!!");
 		
-		return telaLista(model);
+		return telaLista(model, usuario);
 	}
 
 	@GetMapping(value = "/aluno/{id}/excluir")
-	public String excluir(Model model, @PathVariable Integer id) {
+	public String excluir(Model model, @PathVariable Integer id, @SessionAttribute("user") Usuario usuario) {
 		
 		Aluno aluno = alunoService.obterPorId(id);
 				
@@ -51,6 +55,6 @@ public class AlunoController {
 			model.addAttribute("mensagem", "Aluno inexistente.. impossível realizar a exclusão!!!");			
 		}
 		
-		return telaLista(model);
+		return telaLista(model, usuario);
 	}
 }

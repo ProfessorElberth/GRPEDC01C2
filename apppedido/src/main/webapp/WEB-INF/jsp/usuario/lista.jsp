@@ -42,7 +42,7 @@
 			        <td>
 			        <c:if test="${user.admin}">
 			        	<c:if test="${user.id != u.id}">
-			        	<a href="/usuario/${u.id}/excluir">Excluir</a>
+			        		<a href="/usuario/${u.id}/excluir">Excluir</a>
 			        	</c:if>
 			        </c:if>
 			        </td>

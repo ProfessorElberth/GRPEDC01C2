@@ -1,13 +1,30 @@
 package br.edu.infnet.apppedido.model.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
+
 import br.edu.infnet.apppedido.exceptions.PesoInvalidoException;
 import br.edu.infnet.apppedido.exceptions.ValorInvalidoException;
 
+@Entity
+@Table(name = "TProduto")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Produto {
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	private String descricao;
 	private float valor;
 	private float peso;
+	
+	public Produto() {
+		
+	}
 	
 	public Produto(String descricao, float valor, float peso) throws ValorInvalidoException, PesoInvalidoException {
 		
@@ -38,6 +55,8 @@ public abstract class Produto {
 	public String toString() {
 		
 		StringBuilder sb = new StringBuilder();
+		sb.append(id);
+		sb.append(";");
 		sb.append(descricao);
 		sb.append(";");
 		sb.append(valor);
@@ -49,13 +68,35 @@ public abstract class Produto {
 		return sb.toString();
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
 	public String getDescricao() {
 		return descricao;
 	}
+
 	public float getValor() {
 		return valor;
 	}
+
 	public float getPeso() {
 		return peso;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public void setValor(float valor) {
+		this.valor = valor;
+	}
+
+	public void setPeso(float peso) {
+		this.peso = peso;
 	}
 }

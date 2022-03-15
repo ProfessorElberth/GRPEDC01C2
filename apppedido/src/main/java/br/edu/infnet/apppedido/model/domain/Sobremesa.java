@@ -1,13 +1,22 @@
 package br.edu.infnet.apppedido.model.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import br.edu.infnet.apppedido.exceptions.PesoInvalidoException;
 import br.edu.infnet.apppedido.exceptions.ValorInvalidoException;
 
+@Entity
+@Table(name = "TSobremesa")
 public class Sobremesa extends Produto {
 
 	private String ingrediente;
 	private boolean calda;
 	private boolean diet;
+	
+	public Sobremesa() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public Sobremesa(String descricao, float valor, float peso) throws ValorInvalidoException, PesoInvalidoException {
 		super(descricao, valor, peso);

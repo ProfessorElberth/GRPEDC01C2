@@ -17,22 +17,22 @@
 
 	<div class="container">
 	
-		<form action="/bebida/incluir" method="post">
-			<h2>Cadastramento de Bebidas</h2>
+		<form action="/comida/incluir" method="post">
+			<h2>Cadastramento de Comidas</h2>
 		
 			<div class="form-group">
 				<label>Descrição:</label>
-				<input type="text" class="form-control" name="descricao" value="Suco de Manga"> 
+				<input type="text" class="form-control" name="descricao" value="Pão com ovo"> 
 			</div>
 
 			<div class="form-group">
 				<label>Valor:</label>
-				<input type="text" class="form-control" name="valor" value="10"> 
+				<input type="text" class="form-control" name="valor" value="15"> 
 			</div>
 
 			<div class="form-group">
 				<label>Peso:</label>
-				<input type="text" class="form-control" name="peso" value="300"> 
+				<input type="text" class="form-control" name="peso" value="250"> 
 			</div>
 
 			<div class="form-group">
@@ -41,13 +41,20 @@
 			</div>
 
 			<div class="form-group">
+				<label>Acompanhamento:</label>
+				<input type="text" class="form-control" name="acompanhamento" value="pão e ovo"> 
+			</div>
+
+			<div class="form-group">
+				<label>Qtde Servido:</label>
+				<input type="text" class="form-control" name="qtdeServido" value="1"> 
+			</div>
+
+			<div class="form-group">
 				<label>Características:</label>
 				
 				<div class="checkbox">
-				  <label><input type="checkbox" name="importada" value="true" checked> Importada</label>
-				</div>				
-				<div class="checkbox">
-				  <label><input type="checkbox" name="gelada" value="true" checked> Gelada</label>
+				  <label><input type="checkbox" name="vegana" value="true" checked> Vegana</label>
 				</div>				
 			</div>
 

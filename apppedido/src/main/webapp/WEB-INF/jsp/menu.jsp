@@ -9,7 +9,10 @@
 				  <c:if test="${not empty user}">
                   <li class="nav-item"><a class="nav-link" href="/usuarios">Usuário</a></li>
                   <li class="nav-item"><a class="nav-link" href="/alunos">Aluno</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/produtos">Produto</a></li>
                   <li class="nav-item"><a class="nav-link" href="/bebidas">Bebida</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/comidas">Comida</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/sobremesas">Sobremesa</a></li>
                   </c:if>
 
                   <li class="nav-item"><a class="nav-link" href="#about">About</a></li>

@@ -7,44 +7,44 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import br.edu.infnet.apppedido.model.domain.Bebida;
-import br.edu.infnet.apppedido.model.service.BebidaService;
+import br.edu.infnet.apppedido.model.domain.Comida;
+import br.edu.infnet.apppedido.model.service.ComidaService;
 import br.edu.infnet.apppedido.model.service.ProdutoService;
 
 @Controller
-public class BebidaController {
+public class ComidaController {
 	
 	@Autowired
-	private BebidaService bebidaService;
+	private ComidaService comidaService;
 	@Autowired
 	private ProdutoService produtoService;
 
-	@GetMapping(value = "/bebidas")
+	@GetMapping(value = "/comidas")
 	public String telaLista(Model model) {
 
-		model.addAttribute("bebidaLista", bebidaService.obterLista());
+		model.addAttribute("comidaLista", comidaService.obterLista());
 		
-		return "bebida/lista";
+		return "comida/lista";
 	}
 
-	@GetMapping(value = "/bebida")
+	@GetMapping(value = "/comida")
 	public String telaCadastro() {
-		return "bebida/cadastro";
+		return "comida/cadastro";
 	}
 
-	@PostMapping(value = "/bebida/incluir")
-	public String incluir(Bebida bebida) {
+	@PostMapping(value = "/comida/incluir")
+	public String incluir(Comida comida) {
 
-		produtoService.incluir(bebida);
+		produtoService.incluir(comida);
 		
-		return "redirect:/bebidas";
+		return "redirect:/comidas";
 	}
 
-	@GetMapping(value = "/bebida/{id}/excluir")
+	@GetMapping(value = "/comida/{id}/excluir")
 	public String excluir(@PathVariable Integer id) {
 		
 		produtoService.excluir(id);
 		
-		return "redirect:/bebidas";
+		return "redirect:/comidas";
 	}
 }

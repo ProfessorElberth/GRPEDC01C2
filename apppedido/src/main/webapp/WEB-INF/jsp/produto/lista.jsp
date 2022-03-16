@@ -12,11 +12,7 @@
 
 	<div class="container fixed-top" >	
 
-		<h4>Cadastramento de bebidas:</h4>
-
-		<form action="/bebida" method="get">
-			<button type="submit">Nova bebida</button>
-		</form>
+		<h4>Cadastramento de produtos:</h4>
 
 		<c:if test="${not empty mensagem}">
 			<div class="alert alert-success">
@@ -24,8 +20,8 @@
 			</div>
 		</c:if>
 
-		<c:if test="${not empty bebidaLista}">
-		  	<p>Quantidade de bebidas cadastradas: ${bebidaLista.size()}</p>            
+		<c:if test="${not empty produtoLista}">
+		  	<p>Quantidade de produtos cadastrados: ${produtoLista.size()}</p>            
 		  	<table class="table table-striped">
 			    <thead>
 			      <tr>
@@ -33,23 +29,17 @@
 			        <th>Descrição</th>
 			        <th>Valor</th>
 			        <th>Peso</th>
-			        <th>Marca</th>
-			        <th>Importada</th>
-			        <th>Gelada</th>
 			        <th></th>
 			      </tr>
 			    </thead>
 			    <tbody>
-			    <c:forEach var="b" items="${bebidaLista}">
+			    <c:forEach var="p" items="${produtoLista}">
 			      <tr>
-			        <td>${b.id}</td>
-			        <td>${b.descricao}</td>
-			        <td>${b.valor}</td>
-			        <td>${b.peso}</td>
-			        <td>${b.marca}</td>
-			        <td>${b.importada}</td>
-			        <td>${b.gelada}</td>
-			        <td><a href="/bebida/${b.id}/excluir">Excluir</a></td>
+			        <td>${p.id}</td>
+			        <td>${p.descricao}</td>
+			        <td>${p.valor}</td>
+			        <td>${p.peso}</td>
+			        <td><a href="/produto/${p.id}/excluir">Excluir</a></td>
 			      </tr>
 				</c:forEach>
 			    </tbody>
@@ -59,17 +49,14 @@
 			        <th>Descrição</th>
 			        <th>Valor</th>
 			        <th>Peso</th>
-			        <th>Marca</th>
-			        <th>Importada</th>
-			        <th>Gelada</th>
 			        <th></th>
 			      </tr>
 			    </tfoot>
 		  	</table>
 		</c:if>
 		
-		<c:if test="${empty bebidaLista}">
-	  		<p>Não existem bebidas cadastradas!!!</p>            
+		<c:if test="${empty produtoLista}">
+	  		<p>Não existem produtos cadastrados!!!</p>            
 	  	</c:if>
 	</div>
 </body>

@@ -15,6 +15,15 @@
 	</header>
 
 	<div class="container">
+
+		<form action="/cep" class="form-inline" method="post">	
+			<div class="form-group">
+				<label>Cep:</label>
+				<input type="text" class="form-control" name="cep" value="24.123-45"> 
+			</div>
+			
+			<button type="submit" class="btn btn-primary">Buscar</button>
+		</form>
 	
 		<form action="/usuario/incluir" method="post">
 			<h2>Cadastramento de Usuários</h2>
@@ -33,6 +42,8 @@
 				<label>Senha:</label>
 				<input type="password" class="form-control" name="senha" value="123"> 
 			</div>
+			
+			<c:import url="/WEB-INF/jsp/endereco.jsp"/>
 
 			<button type="submit">Cadastrar</button>
 		</form>	

@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +26,9 @@ public class Usuario {
 	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
 	@JoinColumn(name = "idusuario")
 	private List<Aluno> alunos;
+	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "idendereco")	
+	private Endereco endereco;
 	
 	public Usuario() {
 		this.nome = "Elberth Moraes";
@@ -76,5 +80,13 @@ public class Usuario {
 
 	public void setAlunos(List<Aluno> alunos) {
 		this.alunos = alunos;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 }

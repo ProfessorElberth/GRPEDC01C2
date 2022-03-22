@@ -28,6 +28,7 @@
 			        <th>Nome</th>
 			        <th>E-mail</th>
 			        <th>Admin</th>
+			        <th>Endereço</th>
 			        <th>Alunos</th>
 			        <th></th>
 			      </tr>
@@ -38,6 +39,7 @@
 			        <td>${u.nome}</td>
 			        <td>${u.email}</td>
 			        <td>${u.admin}</td>
+			        <td>${u.endereco.uf}</td>
 			        <td>${u.alunos.size()}</td>
 			        <td>
 			        <c:if test="${user.admin}">
@@ -54,6 +56,7 @@
 			        <th>Nome</th>
 			        <th>E-mail</th>
 			        <th>Admin</th>
+			        <th>Endereço</th>
 			        <th>Alunos</th>
 			        <th></th>
 			      </tr>

@@ -12,10 +12,10 @@
 
 	<div class="container fixed-top" >	
 
-		<h4>Cadastramento de alunos:</h4>
+		<h4>Cadastramento de solicitantes:</h4>
 
-		<form action="/aluno" method="get">
-			<button type="submit">Novo aluno</button>
+		<form action="/solicitante" method="get">
+			<button type="submit">Novo solicitante</button>
 		</form>
 
 		<c:if test="${not empty mensagem}">
@@ -24,30 +24,26 @@
 			</div>
 		</c:if>
 
-		<c:if test="${not empty alunoLista}">
-		  	<p>Quantidade de alunos cadastrados: ${alunoLista.size()}</p>            
+		<c:if test="${not empty solicitanteLista}">
+		  	<p>Quantidade de solicitantes cadastrados: ${solicitanteLista.size()}</p>            
 		  	<table class="table table-striped">
 			    <thead>
 			      <tr>
 			        <th>Nome</th>
 			        <th>E-mail</th>
-			        <th>Idade</th>
-			        <th>Curso</th>
-			        <th>Região</th>
+			        <th>CPF</th>
 			        <th>Usuário</th>
 			        <th></th>
 			      </tr>
 			    </thead>
 			    <tbody>
-			    <c:forEach var="a" items="${alunoLista}">
+			    <c:forEach var="s" items="${solicitanteLista}">
 			      <tr>
-			        <td>${a.nome}</td>
-			        <td>${a.email}</td>
-			        <td>${a.idade}</td>
-			        <td>${a.curso}</td>
-			        <td>${a.regiao}</td>
-			        <td>${a.usuario.nome}</td>
-			        <td><a href="/aluno/${a.id}/excluir">Excluir</a></td>
+			        <td>${s.nome}</td>
+			        <td>${s.email}</td>
+			        <td>${s.cpf}</td>
+			        <td>${s.usuario.nome}</td>
+			        <td><a href="/solicitante/${s.id}/excluir">Excluir</a></td>
 			      </tr>
 				</c:forEach>
 			    </tbody>
@@ -55,17 +51,16 @@
 			      <tr>
 			        <th>Nome</th>
 			        <th>E-mail</th>
-			        <th>Idade</th>
-			        <th>Curso</th>
-			        <th>Região</th>
+			        <th>CPF</th>
+			        <th>Usuário</th>
 			        <th></th>
 			      </tr>
 			    </tfoot>
 		  	</table>
 		</c:if>
 		
-		<c:if test="${empty alunoLista}">
-	  		<p>Não existem alunos cadastrados!!!</p>            
+		<c:if test="${empty solicitanteLista}">
+	  		<p>Não existem solicitantes cadastrados!!!</p>            
 	  	</c:if>
 	</div>
 </body>

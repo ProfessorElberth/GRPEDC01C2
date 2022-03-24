@@ -8,7 +8,7 @@
               <ul class="navbar-nav ms-auto my-2 my-lg-0">
 				  <c:if test="${not empty user}">
                   <li class="nav-item"><a class="nav-link" href="/usuarios">Usuário</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/alunos">Aluno</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/solicitantes">Solicitante</a></li>
                   <li class="nav-item"><a class="nav-link" href="/produtos">Produto</a></li>
                   <li class="nav-item"><a class="nav-link" href="/bebidas">Bebida</a></li>
                   <li class="nav-item"><a class="nav-link" href="/comidas">Comida</a></li>

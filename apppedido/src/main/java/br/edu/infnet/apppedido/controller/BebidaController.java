@@ -6,8 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import br.edu.infnet.apppedido.model.domain.Bebida;
+import br.edu.infnet.apppedido.model.domain.Usuario;
 import br.edu.infnet.apppedido.model.service.BebidaService;
 import br.edu.infnet.apppedido.model.service.ProdutoService;
 
@@ -20,9 +22,9 @@ public class BebidaController {
 	private ProdutoService produtoService;
 
 	@GetMapping(value = "/bebidas")
-	public String telaLista(Model model) {
+	public String telaLista(Model model, @SessionAttribute("user") Usuario usuario) {
 
-		model.addAttribute("bebidaLista", bebidaService.obterLista());
+		model.addAttribute("bebidaLista", bebidaService.obterLista(usuario));
 		
 		return "bebida/lista";
 	}
@@ -33,7 +35,9 @@ public class BebidaController {
 	}
 
 	@PostMapping(value = "/bebida/incluir")
-	public String incluir(Bebida bebida) {
+	public String incluir(Bebida bebida, @SessionAttribute("user") Usuario usuario) {
+		
+		bebida.setUsuario(usuario);
 
 		produtoService.incluir(bebida);
 		

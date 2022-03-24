@@ -6,8 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import br.edu.infnet.apppedido.model.domain.Sobremesa;
+import br.edu.infnet.apppedido.model.domain.Usuario;
 import br.edu.infnet.apppedido.model.service.ProdutoService;
 import br.edu.infnet.apppedido.model.service.SobremesaService;
 
@@ -33,7 +35,9 @@ public class SobremesaController {
 	}
 
 	@PostMapping(value = "/sobremesa/incluir")
-	public String incluir(Sobremesa sobremesa) {
+	public String incluir(Sobremesa sobremesa, @SessionAttribute("user") Usuario usuario) {
+		
+		sobremesa.setUsuario(usuario);
 
 		produtoService.incluir(sobremesa);
 		

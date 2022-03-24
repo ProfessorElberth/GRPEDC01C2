@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.edu.infnet.apppedido.exceptions.PesoInvalidoException;
@@ -21,6 +23,9 @@ public abstract class Produto {
 	private String descricao;
 	private float valor;
 	private float peso;
+	@ManyToOne
+	@JoinColumn(name = "idusuario")
+	private Usuario usuario;
 	
 	public Produto() {
 		
@@ -98,5 +103,13 @@ public abstract class Produto {
 
 	public void setPeso(float peso) {
 		this.peso = peso;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 }

@@ -1,5 +1,7 @@
 package br.edu.infnet.apppedido.model.domain;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -26,6 +29,8 @@ public abstract class Produto {
 	@ManyToOne
 	@JoinColumn(name = "idusuario")
 	private Usuario usuario;
+	@ManyToMany(mappedBy = "produtos")
+	private List<Pedido> pedidos;
 	
 	public Produto() {
 		
@@ -89,6 +94,14 @@ public abstract class Produto {
 		return peso;
 	}
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -105,11 +118,11 @@ public abstract class Produto {
 		this.peso = peso;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 }

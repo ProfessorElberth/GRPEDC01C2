@@ -22,9 +22,9 @@ public class ComidaController {
 	private ProdutoService produtoService;
 
 	@GetMapping(value = "/comidas")
-	public String telaLista(Model model) {
+	public String telaLista(Model model, @SessionAttribute("user") Usuario usuario) {
 
-		model.addAttribute("comidaLista", comidaService.obterLista());
+		model.addAttribute("comidaLista", comidaService.obterLista(usuario));
 		
 		return "comida/lista";
 	}
@@ -35,20 +35,33 @@ public class ComidaController {
 	}
 
 	@PostMapping(value = "/comida/incluir")
-	public String incluir(Comida comida, @SessionAttribute("user") Usuario usuario) {
+	public String incluir(Model model, Comida comida, @SessionAttribute("user") Usuario usuario) {
 		
 		comida.setUsuario(usuario);
 
 		produtoService.incluir(comida);
 		
-		return "redirect:/comidas";
+		model.addAttribute("mensagem", "A comida " + comida.getDescricao() + " foi incluída com sucesso!!!");
+
+		return telaLista(model, usuario);
 	}
 
 	@GetMapping(value = "/comida/{id}/excluir")
-	public String excluir(@PathVariable Integer id) {
+	public String excluir(Model model, @PathVariable Integer id, @SessionAttribute("user") Usuario usuario) {
+
+		Comida comida = (Comida) produtoService.obterPorId(id);
 		
-		produtoService.excluir(id);
+		if(comida != null) {
+			try {
+				produtoService.excluir(id);				
+				model.addAttribute("mensagem", "A comida "+comida.getDescricao()+" foi excluída com sucesso!!!");
+			} catch (Exception e) {
+				model.addAttribute("mensagem", "Impossível realizar a exclusão! A comida "+comida.getDescricao()+" está associada a um pedido!!!");
+			}
+		} else {
+			model.addAttribute("mensagem", "Comida inexistente.. impossível realizar a exclusão!!!");			
+		}
 		
-		return "redirect:/comidas";
+		return telaLista(model, usuario);
 	}
 }

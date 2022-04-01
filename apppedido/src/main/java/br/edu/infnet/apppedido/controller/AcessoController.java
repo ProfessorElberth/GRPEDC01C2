@@ -1,5 +1,8 @@
 package br.edu.infnet.apppedido.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import br.edu.infnet.apppedido.model.domain.Usuario;
+import br.edu.infnet.apppedido.model.service.PedidoService;
+import br.edu.infnet.apppedido.model.service.ProdutoService;
+import br.edu.infnet.apppedido.model.service.SolicitanteService;
 import br.edu.infnet.apppedido.model.service.UsuarioService;
 
 @SessionAttributes("user")
@@ -20,9 +26,24 @@ public class AcessoController {
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	@Autowired
+	private SolicitanteService solicitanteService;
+	@Autowired
+	private ProdutoService produtoService;
+	@Autowired
+	private PedidoService pedidoService;
 
 	@GetMapping(value = "/")
-	public String telaHome() {
+	public String telaHome(Model model) {
+		
+		Map<String, Integer> appMapa = new HashMap<String, Integer>();
+		appMapa.put("Usuário", usuarioService.obterQtde());
+		appMapa.put("Solicitante", solicitanteService.obterQtde());
+		appMapa.put("Produto", produtoService.obterQtde());
+		appMapa.put("Pedido", pedidoService.obterQtde());
+		
+		model.addAttribute("mapa", appMapa);
+		
 		return "home";		
 	}
 	

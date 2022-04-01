@@ -9,6 +9,8 @@
     </head>
 <body>
 
+	<c:set var="statusBotao" value=""/>
+
 	<header class="masthead">
     <div class="container px-4 px-lg-5 h-100">
 	<c:import url="/WEB-INF/jsp/menu.jsp"/>
@@ -26,25 +28,40 @@
 			</div>
 
 			<div class="form-group">
-				<label>Solicitante:</label>
-				<select name="solicitante.id" class="form-control">
-					<c:forEach var="s" items="${solicitanteLista}">
-						<option value="${s.id}">${s.nome}</option>
-					</c:forEach>
-				</select>
+				<c:if test="${not empty solicitanteLista}">
+					<label>Solicitante:</label>
+					<select name="solicitante.id" class="form-control">
+						<c:forEach var="s" items="${solicitanteLista}">
+							<option value="${s.id}">${s.nome}</option>
+						</c:forEach>
+					</select>
+				</c:if>
+				
+				
+				<c:if test="${empty solicitanteLista}">
+					<label>Nenhum solicitante cadastrado!!!</label>
+					<c:set var="statusBotao" value="disabled"/>
+				</c:if>				
 			</div>
 
 			<div class="form-group">
-				<label>Produtos:</label>
+				<c:if test="${not empty produtoLista}">
+					<label>Produtos:</label>
+					
+					<c:forEach var="p" items="${produtoLista}">
+						<div class="checkbox">
+						  <label><input type="checkbox" name="idsProdutos" value="${p.id}" checked> ${p.descricao}</label>
+						</div>
+					</c:forEach>	
+				</c:if>
 				
-				<c:forEach var="p" items="${produtoLista}">
-					<div class="checkbox">
-					  <label><input type="checkbox" name="idsProdutos" value="${p.id}" checked> ${p.descricao}</label>
-					</div>
-				</c:forEach>	
+				<c:if test="${empty produtoLista}">
+					<label>Nenhum produto cadastrado!!!</label>
+					<c:set var="statusBotao" value="disabled"/>
+				</c:if>				
 			</div>
 
-			<button type="submit">Cadastrar</button>
+			<button ${statusBotao} type="submit">Cadastrar</button>
 		</form>		
 	</div>
 </body>

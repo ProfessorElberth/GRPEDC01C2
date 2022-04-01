@@ -11,9 +11,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "TUsuario")
+@Table(name = "TUsuario", 
+	uniqueConstraints = { 
+			@UniqueConstraint(columnNames = { "nome" }), 
+			@UniqueConstraint(columnNames = { "email" }) 
+		}
+)
 public class Usuario {
 
 	@Id
@@ -32,7 +38,7 @@ public class Usuario {
 	@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
 	@JoinColumn(name = "idusuario")
 	private List<Pedido> pedidos;
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "idendereco")	
 	private Endereco endereco;
 	

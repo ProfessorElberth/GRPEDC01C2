@@ -14,4 +14,6 @@ public interface SobremesaRepository extends CrudRepository<Sobremesa, Integer> 
 
 	@Query("from Sobremesa s where s.usuario.id = :idUsuario")
 	Collection<Sobremesa> findAll(Integer idUsuario, Sort by);
+
+	Collection<Sobremesa> findAll(Sort by);
 }

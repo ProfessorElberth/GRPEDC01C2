@@ -22,9 +22,9 @@ public class SobremesaController {
 	private ProdutoService produtoService;
 
 	@GetMapping(value = "/sobremesas")
-	public String telaLista(Model model) {
+	public String telaLista(Model model, @SessionAttribute("user") Usuario usuario) {
 
-		model.addAttribute("sobremesaLista", sobremesaService.obterLista());
+		model.addAttribute("sobremesaLista", sobremesaService.obterLista(usuario));
 		
 		return "sobremesa/lista";
 	}
@@ -35,20 +35,33 @@ public class SobremesaController {
 	}
 
 	@PostMapping(value = "/sobremesa/incluir")
-	public String incluir(Sobremesa sobremesa, @SessionAttribute("user") Usuario usuario) {
+	public String incluir(Model model, Sobremesa sobremesa, @SessionAttribute("user") Usuario usuario) {
 		
 		sobremesa.setUsuario(usuario);
 
 		produtoService.incluir(sobremesa);
 		
-		return "redirect:/sobremesas";
+		model.addAttribute("mensagem", "A sobremesa " + sobremesa.getDescricao() + " foi incluída com sucesso!!!");
+
+		return telaLista(model, usuario);
 	}
 
 	@GetMapping(value = "/sobremesa/{id}/excluir")
-	public String excluir(@PathVariable Integer id) {
+	public String excluir(Model model, @PathVariable Integer id, @SessionAttribute("user") Usuario usuario) {
+
+		Sobremesa sobremesa = (Sobremesa) produtoService.obterPorId(id);
 		
-		produtoService.excluir(id);
+		if(sobremesa != null) {
+			try {
+				produtoService.excluir(id);				
+				model.addAttribute("mensagem", "A sobremesa "+sobremesa.getDescricao()+" foi excluída com sucesso!!!");
+			} catch (Exception e) {
+				model.addAttribute("mensagem", "Impossível realizar a exclusão! A sobremesa "+sobremesa.getDescricao()+" está associada a um pedido!!!");
+			}
+		} else {
+			model.addAttribute("mensagem", "Sobremesa inexistente.. impossível realizar a exclusão!!!");			
+		}
 		
-		return "redirect:/sobremesas";
+		return telaLista(model, usuario);
 	}
 }

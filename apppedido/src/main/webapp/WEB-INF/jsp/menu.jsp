@@ -16,10 +16,8 @@
                   <li class="nav-item"><a class="nav-link" href="/pedidos">Pedido</a></li>
                   </c:if>
 
-                  <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#about">Sobre</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#services">Serviços</a></li>
 
   				  <c:if test="${empty user}">
                   <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>

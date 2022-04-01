@@ -35,4 +35,8 @@ public class ProdutoService {
 	public Collection<Produto> obterLista() {
 		return (Collection<Produto>) produtoRepository.findAll(Sort.by(Sort.Direction.ASC, "descricao")); 
 	}	
+
+	public Integer obterQtde(){
+		return (int) produtoRepository.count();
+	}
 }

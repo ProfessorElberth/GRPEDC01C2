@@ -7,13 +7,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import br.edu.infnet.apppedido.exceptions.CpfInvalidoException;
 import br.edu.infnet.apppedido.exceptions.EmailInvalidoException;
 import br.edu.infnet.apppedido.exceptions.NomeInvalidoException;
 
 @Entity
-@Table(name = "TSolicitante")
+@Table(name = "TSolicitante", 
+	uniqueConstraints = { 
+			@UniqueConstraint(columnNames = { "nome", "email" }) 
+		}
+)
 public class Solicitante {
 
 	@Id

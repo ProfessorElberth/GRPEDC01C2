@@ -35,20 +35,33 @@ public class BebidaController {
 	}
 
 	@PostMapping(value = "/bebida/incluir")
-	public String incluir(Bebida bebida, @SessionAttribute("user") Usuario usuario) {
+	public String incluir(Model model, Bebida bebida, @SessionAttribute("user") Usuario usuario) {
 		
 		bebida.setUsuario(usuario);
 
 		produtoService.incluir(bebida);
 		
-		return "redirect:/bebidas";
+		model.addAttribute("mensagem", "A bebida " + bebida.getDescricao() + " foi incluída com sucesso!!!");
+
+		return telaLista(model, usuario);
 	}
 
 	@GetMapping(value = "/bebida/{id}/excluir")
-	public String excluir(@PathVariable Integer id) {
+	public String excluir(Model model, @PathVariable Integer id, @SessionAttribute("user") Usuario usuario) {
+
+		Bebida bebida = (Bebida) produtoService.obterPorId(id);
 		
-		produtoService.excluir(id);
+		if(bebida != null) {
+			try {
+				produtoService.excluir(id);				
+				model.addAttribute("mensagem", "A bebida "+bebida.getDescricao()+" foi excluída com sucesso!!!");
+			} catch (Exception e) {
+				model.addAttribute("mensagem", "Impossível realizar a exclusão! A bebida "+bebida.getDescricao()+" está associada a um pedido!!!");
+			}
+		} else {
+			model.addAttribute("mensagem", "Bebida inexistente.. impossível realizar a exclusão!!!");			
+		}
 		
-		return "redirect:/bebidas";
+		return telaLista(model, usuario);
 	}
 }

@@ -26,23 +26,26 @@ public class PedidoLoader implements ApplicationRunner {
 	private PedidoService pedidoService;
 
 	@Override
-	public void run(ApplicationArguments args) throws Exception {
-		
-		List<Produto> produtos = new ArrayList<Produto>(
-					produtoService.obterLista()
-				);
-
-		Solicitante solicitante = new Solicitante();
-		solicitante.setId(1);
-		
-		Usuario usuario = new Usuario();
-		usuario.setId(1);
-
-		Pedido pedido = new Pedido(solicitante);
-		pedido.setDescricao("Pedido do professor elberth");
-		pedido.setProdutos(produtos);
-		pedido.setUsuario(usuario);
-		
-		pedidoService.incluir(pedido);
+	public void run(ApplicationArguments args) {
+		try {
+			List<Produto> produtos = new ArrayList<Produto>(
+						produtoService.obterLista()
+					);
+	
+			Solicitante solicitante = new Solicitante();
+			solicitante.setId(1);
+			
+			Usuario usuario = new Usuario();
+			usuario.setId(1);
+	
+			Pedido pedido = new Pedido(solicitante);
+			pedido.setDescricao("Pedido do professor elberth");
+			pedido.setProdutos(produtos);
+			pedido.setUsuario(usuario);
+			
+			pedidoService.incluir(pedido);
+		} catch (Exception e) {
+			System.out.println("Impossível realizar a inclusão: " + e.getMessage());
+		}
 	}
 }

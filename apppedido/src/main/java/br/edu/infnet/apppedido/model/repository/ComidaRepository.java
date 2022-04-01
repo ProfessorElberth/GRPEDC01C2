@@ -14,4 +14,6 @@ public interface ComidaRepository extends CrudRepository<Comida, Integer> {
 
 	@Query("from Comida c where c.usuario.id = :idUsuario")
 	Collection<Comida> findAll(Integer idUsuario, Sort by);
+	
+	Collection<Comida> findAll(Sort by);
 }

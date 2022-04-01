@@ -14,12 +14,17 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import br.edu.infnet.apppedido.exceptions.PedidoSemProdutosException;
 import br.edu.infnet.apppedido.exceptions.SolicitanteInexistenteException;
 
 @Entity
-@Table(name = "TPedido")
+@Table(name = "TPedido", 
+uniqueConstraints = { 
+		@UniqueConstraint(columnNames = { "descricao", "idSolicitante" }) 
+	}
+)
 public class Pedido {
 
 	@Id

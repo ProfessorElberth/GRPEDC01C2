@@ -12,12 +12,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import br.edu.infnet.apppedido.exceptions.PesoInvalidoException;
 import br.edu.infnet.apppedido.exceptions.ValorInvalidoException;
 
 @Entity
-@Table(name = "TProduto")
+@Table(name = "TProduto", 
+uniqueConstraints = { 
+		@UniqueConstraint(columnNames = { "descricao", "valor", "peso" }) 
+	}
+)
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Produto {
 	@Id

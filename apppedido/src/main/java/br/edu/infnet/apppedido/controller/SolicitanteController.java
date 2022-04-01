@@ -48,9 +48,13 @@ public class SolicitanteController {
 		
 		Solicitante solicitante = solicitanteService.obterPorId(id);
 				
-		if(solicitante != null) {			
-			solicitanteService.excluir(id);			
-			model.addAttribute("mensagem", "O solicitante "+solicitante.getNome()+" foi excluído com sucesso!!!");
+		if(solicitante != null) {
+			try {
+				solicitanteService.excluir(id);				
+				model.addAttribute("mensagem", "O solicitante "+solicitante.getNome()+" foi excluído com sucesso!!!");
+			} catch (Exception e) {
+				model.addAttribute("mensagem", "Impossível realizar a exclusão! O solicitante "+solicitante.getNome()+" está associado a um pedido!!!");
+			}
 		} else {
 			model.addAttribute("mensagem", "Solicitante inexistente.. impossível realizar a exclusão!!!");			
 		}

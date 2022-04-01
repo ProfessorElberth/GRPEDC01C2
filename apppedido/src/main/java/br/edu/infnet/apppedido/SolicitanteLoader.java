@@ -18,14 +18,18 @@ public class SolicitanteLoader implements ApplicationRunner {
 	private SolicitanteService solicitanteService;
 
 	@Override
-	public void run(ApplicationArguments args) throws Exception {
+	public void run(ApplicationArguments args) {
 		
-		Usuario usuario = new Usuario();
-		usuario.setId(1);
-
-		Solicitante solicitante = new Solicitante("Elberth", "elberth@elberth", "123.456.789-12");
-		solicitante.setUsuario(usuario);
-		
-		solicitanteService.incluir(solicitante);
+		try {
+			Usuario usuario = new Usuario();
+			usuario.setId(1);
+	
+			Solicitante solicitante = new Solicitante("Elberth", "elberth@elberth", "123.456.789-12");
+			solicitante.setUsuario(usuario);
+			
+			solicitanteService.incluir(solicitante);
+		} catch (Exception e) {
+			System.out.println("Impossível realizar a inclusão: " + e.getMessage());
+		}
 	}
 }

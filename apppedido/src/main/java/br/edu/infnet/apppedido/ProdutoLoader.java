@@ -20,30 +20,33 @@ public class ProdutoLoader implements ApplicationRunner {
 	private ProdutoService produtoService;
 
 	@Override
-	public void run(ApplicationArguments args) throws Exception {
-
-		Usuario usuario = new Usuario();
-		usuario.setId(1);
-
-		Bebida vinho = new Bebida("Vinho", 100, 350);
-		vinho.setGelada(false);
-		vinho.setImportada(true);
-		vinho.setMarca("Genericão");
-		vinho.setUsuario(usuario);
-		produtoService.incluir(vinho);
-		
-		Comida pizza = new Comida("Pizza", 50, 700);
-		pizza.setAcompanhamento("Docinho do vovó");
-		pizza.setQtdeServido(4);
-		pizza.setVegana(false);
-		pizza.setUsuario(usuario);
-		produtoService.incluir(pizza);
-		
-		Sobremesa chocolate = new Sobremesa("Chocolate", 10, 50);
-		chocolate.setCalda(true);
-		chocolate.setDiet(false);
-		chocolate.setIngrediente("muito chocolate");
-		chocolate.setUsuario(usuario);
-		produtoService.incluir(chocolate);
+	public void run(ApplicationArguments args) {
+		try {		
+			Usuario usuario = new Usuario();
+			usuario.setId(1);
+	
+			Bebida vinho = new Bebida("Vinho", 100, 350);
+			vinho.setGelada(false);
+			vinho.setImportada(true);
+			vinho.setMarca("Genericão");
+			vinho.setUsuario(usuario);
+			produtoService.incluir(vinho);
+			
+			Comida pizza = new Comida("Pizza", 50, 700);
+			pizza.setAcompanhamento("Docinho do vovó");
+			pizza.setQtdeServido(4);
+			pizza.setVegana(false);
+			pizza.setUsuario(usuario);
+			produtoService.incluir(pizza);
+			
+			Sobremesa chocolate = new Sobremesa("Chocolate", 10, 50);
+			chocolate.setCalda(true);
+			chocolate.setDiet(false);
+			chocolate.setIngrediente("muito chocolate");
+			chocolate.setUsuario(usuario);
+			produtoService.incluir(chocolate);
+		} catch (Exception e) {
+			System.out.println("Impossível realizar a inclusão: " + e.getMessage());
+		}
 	}
 }
